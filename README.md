@@ -1,1 +1,1 @@
-# MR-KGV
+# Mixed Reality Knowledge Graph Visualizer
