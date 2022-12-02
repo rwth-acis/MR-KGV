@@ -1,0 +1,70 @@
+# This vocabulary has been created by https://gitlab.com/kjunghanns
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix purl: <http://purl.org/net/> .
+@prefix purl-dc: <http://purl.org/dc/terms/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <http://schema.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix halleOnt: <http://halle/ontology/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+#################################################################
+#    Classes
+#################################################################
+
+halleOnt:WeightedRelation rdf:type owl:Class ;
+    rdfs:subClassOf owl:Thing ;
+    rdfs:label "Gewichtete Beziehung"@de .
+
+halleOnt:Term rdf:type owl:Class ;
+    rdfs:subClassOf owl:Thing ;
+    xsd:language 'de' ;
+    rdfs:label "Begriff"@de .
+
+halleOnt:Area rdf:type owl:Class ;
+    rdfs:subClassOf owl:Thing ;
+    rdfs:comment "Gebietsnummer"@de ;
+    rdfs:label "Gebiet"@de .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+halleOnt:relates rdf:type owl:owl:SymmetricProperty ;
+    rdfs:domain halleOnt:Term ;
+    rdfs:range halleOnt:Term ;
+    rdfs:label "Steht in Beziehung"@de ;
+    rdfs:comment "Zwei Terme stehen in (einer unspeziefischen) Beziehung zueinander."@de .
+
+halleOnt:inArea rdf:type owl:ObjectProperty ;
+    owl:inverseOf halleOnt:contains ;
+    rdfs:domain halleOnt:Term ;
+    rdfs:range halleOnt:Area ;
+    rdfs:label "In Gebiet"@de ;
+    rdfs:comment "Der Term gehört zu einem Gebiet. Kann als Oberthema interetiert werden."@de .
+
+halleOnt:contains rdf:type owl:ObjectProperty ;
+    owl:inverseOf halleOnt:inArea ;
+    rdfs:domain halleOnt:Area ;
+    rdfs:range halleOnt:Term ;
+    rdfs:label "Gebiet enthält"@de ;
+    rdfs:comment "Das Gebiet enthält Terme."@de .
+
+halleOnt:relatedTerm rdf:type owl:ObjectProperty ;
+    rdfs:domain halleOnt:WeightedRelation ;
+    rdfs:range halleOnt:Term ;
+    rdfs:label "Wort"@de ;
+    rdfs:comment "Ein Gewichtsknoten verbindet zwei Terme."@de .
+
+#################################################################
+#    Data Properties
+#################################################################
+
+halleOnt:weight rdf:type owl:DatatypeProperty ;
+    rdfs:domain halleOnt:WeightedRelation ;
+    rdfs:range xsd:integer ;
+    rdfs:label "Gewichtung"@de .
