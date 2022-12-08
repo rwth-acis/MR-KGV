@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.i5.toolkit.core": {
+      "version": "https://github.com/rwth-acis/i5-Toolkit-for-Unity.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.textmeshpro": "2.0.1"
+      },
+      "hash": "b1ace86a4912e59a01bc15623c68ec0ac99494f1"
+    },
     "com.unity.collab-proxy": {
       "version": "1.15.18",
       "depth": 0,
