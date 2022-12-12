@@ -5,31 +5,35 @@ using VDS.RDF;
 using VDS.RDF.Parsing;
 
 public class Input : MonoBehaviour {
+
+    private IGraph graph;
+
+    public float radius;
+
+    public GameObject nodePrefab;
+
+    // This dictionary stores the corresponding game objects of the nodes in the graph 
+    private Dictionary<INode, GameObject> nodePositions = new Dictionary<INode, GameObject>();
+
     // Start is called before the first frame update
     void Start() {
+        ReadTurtleFile("Assets/Files/example-modell.ttl");
+
+        analyzeGraphNodes(graph);
+    }
+
+    /// <summary>
+    /// Given a path to a Turtle file, parse the graph data into the global IGraph 'graph'
+    /// </summary>
+    /// <param name="filePath"></param>
+    public void ReadTurtleFile(string filePath) {
         try {
-            IGraph graph = new Graph();
-            TurtleParser ttlparser = new TurtleParser();
+            // Create a new instance of the Turtle parser
+            TurtleParser parser = new TurtleParser();
 
-            //Load using Filename
-            ttlparser.Load(graph, "Assets/Files/example-modell.ttl");
-            //ttlparser.Load(graph, "Assets/Files/vocab.ttl");
+            graph = new Graph();
 
-            analyzeGraphNodes(graph);
-
-            // Get all nodes used as predicates in triples of the graph
-            foreach (INode n in graph.Triples.PredicateNodes) {
-                Debug.Log(n);
-            }
-
-            // "graph.Nodes" gets all nodes used as objects or subjects in triples of the graph
-            //foreach (ILiteralNode ln in graph.Nodes.LiteralNodes()) {
-            //    Debug.Log(ln.Value);
-            //}
-
-            //foreach (IUriNode un in graph.Nodes.UriNodes()) {
-            //    Debug.Log(un.Uri);
-            //}
+            parser.Load(graph, filePath);
         }
         catch (RdfParseException parseEx) {
             //This indicates a parser error e.g unexpected character, premature end of input, invalid syntax etc.
@@ -43,9 +47,15 @@ public class Input : MonoBehaviour {
         }
     }
 
-    // Update is called once per frame
-    void Update() {
+    /// <summary>
+    /// Given a string (representing a URI), return the substring that comes after the last character '/'
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    public string SplitString(string s) {
+        int lastIndex = s.LastIndexOf('/');
 
+        return s.Substring(lastIndex + 1);
     }
 
     /// <summary>
