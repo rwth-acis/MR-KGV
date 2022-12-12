@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56fc60c441af29c45a87366fb5e7149a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0
-  nodePrefab: {fileID: 0}
+  radius: 25
+  nodePrefab: {fileID: 2760059082867781617, guid: c30f99d5d29a43349bc3f72224f511ff, type: 3}
 --- !u!4 &569532273
 Transform:
   m_ObjectHideFlags: 0
