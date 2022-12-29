@@ -1,0 +1,269 @@
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix halleOnt:  <http://halle/ontology/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix halleModel:  <http://halle/domainmodel/> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+halleModel:Informatik
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Informatik"@de .
+
+halleModel:Artificial
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Artificial"@de .
+
+halleModel:b96c8a20-cf2c-4af8-8ae4-76eb9c88c50c
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Informatik ;
+        halleOnt:relatedTerm  halleModel:Artificial ;
+        halleOnt:weight       "0.649717514124294"^^xsd:float .
+
+halleModel:Intelligenz
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Intelligenz"@de .
+
+halleModel:c0278544-80af-4ddb-9e9f-bf7fa93e0604
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Informatik ;
+        halleOnt:relatedTerm  halleModel:Intelligenz ;
+        halleOnt:weight       "0.909604519774011"^^xsd:float .
+
+halleModel:John  rdf:type  halleOnt:Term ;
+        rdfs:label  "John"@de .
+
+halleModel:a1ae1c3e-98ff-4698-ab85-da4489a653aa
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Informatik ;
+        halleOnt:relatedTerm  halleModel:John ;
+        halleOnt:weight       "0.361581920903955"^^xsd:float .
+
+halleModel:Intelligence
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Intelligence"@de .
+
+halleModel:7bd4937a-f7da-4294-9af4-1dfd6f09936e
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Informatik ;
+        halleOnt:relatedTerm  halleModel:Intelligence ;
+        halleOnt:weight       "0.661016949152542"^^xsd:float .
+
+halleModel:Teilgebiet
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Teilgebiet"@de .
+
+halleModel:a6cdc5f4-6a16-4f84-92b6-ab7923d9219a
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Informatik ;
+        halleOnt:relatedTerm  halleModel:Teilgebiet ;
+        halleOnt:weight       "0.711864406779661"^^xsd:float .
+
+halleModel:Verhaltens
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Verhaltens"@de .
+
+halleModel:e3ddc92f-c4eb-447f-bfb9-2fa7320d4987
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Informatik ;
+        halleOnt:relatedTerm  halleModel:Verhaltens ;
+        halleOnt:weight       "0.621468926553672"^^xsd:float .
+
+halleModel:3d2199ef-87fd-49e1-8e26-e541c9c5d373
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Artificial ;
+        halleOnt:relatedTerm  halleModel:Intelligenz ;
+        halleOnt:weight       "0.655367231638418"^^xsd:float .
+
+halleModel:db744ef3-896a-49ab-9b03-fe26e5f5ba69
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Artificial ;
+        halleOnt:relatedTerm  halleModel:Intelligence ;
+        halleOnt:weight       "0.72316384180791"^^xsd:float .
+
+halleModel:Original  rdf:type  halleOnt:Term ;
+        rdfs:label  "Original"@de .
+
+halleModel:074ceba2-0330-4391-969b-85bf46e84186
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Artificial ;
+        halleOnt:relatedTerm  halleModel:Original ;
+        halleOnt:weight       "0.361581920903955"^^xsd:float .
+
+halleModel:Definition
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Definition"@de .
+
+halleModel:Begriff  rdf:type  halleOnt:Term ;
+        rdfs:label  "Begriff"@de .
+
+halleModel:6adde0e4-e884-4a0a-b2c0-69017e8317d0
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Definition ;
+        halleOnt:relatedTerm  halleModel:Begriff ;
+        halleOnt:weight       "0.649717514124294"^^xsd:float .
+
+halleModel:8794ca70-3616-4d0b-bfb2-fc2b3d8032af
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Intelligenz ;
+        halleOnt:relatedTerm  halleModel:Intelligence ;
+        halleOnt:weight       "0.64406779661017"^^xsd:float .
+
+halleModel:aaffdb23-4195-44b5-9ec9-46402dad66d9
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Intelligenz ;
+        halleOnt:relatedTerm  halleModel:Begriff ;
+        halleOnt:weight       "1"^^xsd:float .
+
+halleModel:Maschine  rdf:type  halleOnt:Term ;
+        rdfs:label  "Maschine"@de .
+
+halleModel:0f884726-7578-4466-80ca-9a07e4f87f32
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Intelligenz ;
+        halleOnt:relatedTerm  halleModel:Maschine ;
+        halleOnt:weight       "0.632768361581921"^^xsd:float .
+
+halleModel:Menschen  rdf:type  halleOnt:Term ;
+        rdfs:label  "Menschen"@de .
+
+halleModel:f4124109-6573-4fb1-b0f3-4b9b4a4dd8a3
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Intelligenz ;
+        halleOnt:relatedTerm  halleModel:Menschen ;
+        halleOnt:weight       "0.632768361581921"^^xsd:float .
+
+halleModel:Lernen  rdf:type  halleOnt:Term ;
+        rdfs:label  "Lernen"@de .
+
+halleModel:b57efa7d-066c-4749-9b8c-4403a0f66e56
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Intelligenz ;
+        halleOnt:relatedTerm  halleModel:Lernen ;
+        halleOnt:weight       "0.502824858757062"^^xsd:float .
+
+halleModel:Fähigkeiten
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Fähigkeiten"@de .
+
+halleModel:e54d53dc-7c96-49ad-901a-0a8b3d41f1d1
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Intelligenz ;
+        halleOnt:relatedTerm  halleModel:Fähigkeiten ;
+        halleOnt:weight       "0.661016949152542"^^xsd:float .
+
+halleModel:fab86b18-4bc1-4674-a1a1-e7941a76b75d
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Intelligenz ;
+        halleOnt:relatedTerm  halleModel:Teilgebiet ;
+        halleOnt:weight       "0.638418079096045"^^xsd:float .
+
+halleModel:9849e7cc-5caa-407b-a868-5e5d085e11ed
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Intelligenz ;
+        halleOnt:relatedTerm  halleModel:Verhaltens ;
+        halleOnt:weight       "0.813559322033898"^^xsd:float .
+
+halleModel:Denken  rdf:type  halleOnt:Term ;
+        rdfs:label  "Denken"@de .
+
+halleModel:79fa6dac-3b5f-451b-8735-1766478185f4
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Intelligenz ;
+        halleOnt:relatedTerm  halleModel:Denken ;
+        halleOnt:weight       "0.632768361581921"^^xsd:float .
+
+halleModel:Mccarthy  rdf:type  halleOnt:Term ;
+        rdfs:label  "Mccarthy"@de .
+
+halleModel:d1dbb1ff-c247-4639-b713-77d35c287abe
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:John ;
+        halleOnt:relatedTerm  halleModel:Mccarthy ;
+        halleOnt:weight       "0.361581920903955"^^xsd:float .
+
+halleModel:586c8d59-bdfa-4f7a-b766-76781f1a97f9
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Maschine ;
+        halleOnt:relatedTerm  halleModel:Denken ;
+        halleOnt:weight       "0.666666666666667"^^xsd:float .
+
+halleModel:9a2ef2c7-c0b8-468e-9685-1be3103b214f
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Teilgebiet ;
+        halleOnt:relatedTerm  halleModel:Verhaltens ;
+        halleOnt:weight       "0.598870056497175"^^xsd:float .
+
+<http://halle/domainmodel/%0CC>
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "\fC"@de .
+
+halleModel:CT  rdf:type  halleOnt:Term ;
+        rdfs:label  "CT"@de .
+
+halleModel:46c78b5c-5cf8-4477-914d-c092f8ef3498
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  <http://halle/domainmodel/%0CC> ;
+        halleOnt:relatedTerm  halleModel:CT .
+
+halleModel:f6513feb-f518-4dbf-b713-d7154a4e2392
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Artificial .
+
+halleModel:64d617ce-7ba4-4dc9-ae52-6a0325980ac2
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Begriff .
+
+halleModel:3a084a1e-234e-4ffb-9bbc-87ed951f5815
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Definition .
+
+halleModel:e5879ccf-db06-4673-955c-2a0ca22f7a5d
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Denken .
+
+halleModel:d92c3502-9741-43a2-9c2f-5b2f97319a46
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Fähigkeiten .
+
+halleModel:94e28d10-ae66-47af-9520-a5e664f441b3
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Informatik .
+
+halleModel:ef5e3baa-e4c4-4cfc-811b-3c82e8e78f5f
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Intelligence .
+
+halleModel:a466b9e1-bce8-43e0-a46e-585b662348eb
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Intelligenz .
+
+halleModel:9600e227-04fe-4eb8-8e8c-18689bfac898
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:John .
+
+halleModel:d4fefe5a-8c8c-423f-ada8-a147ce191806
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Lernen .
+
+halleModel:fad2b771-a50e-4ec4-876f-1df5bcf4ff69
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Maschine .
+
+halleModel:af07005d-dc87-4ead-a805-9032c53db7b0
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Mccarthy .
+
+halleModel:6509a2d1-038e-4151-8600-bb99c698c573
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Menschen .
+
+halleModel:5c6a7bed-bbec-4d44-b936-d6a453398e7d
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Original .
+
+halleModel:ee923e33-ace4-4cde-9ed6-44f5554d01a6
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Teilgebiet .
+
+halleModel:a4a67b59-0196-4de4-a2eb-06ef842f6485
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Verhaltens .
