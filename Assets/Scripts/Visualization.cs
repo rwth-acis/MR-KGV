@@ -6,14 +6,28 @@ using VDS.RDF.Parsing;
 
 public class Visualization : MonoBehaviour {
 
+    // Currently loaded graph
     private IGraph graph;
 
+    // Radius in which nodes get initialized around the center point
     public float radius;
+
+    // Center point of the graph visualization; used in layout
+    public GameObject center;
+
+    public GameObject edgePrefab;
 
     public GameObject nodePrefab;
 
+    public GameObject sphereRepresentationPrefab;
+
+    public GameObject imageRepresentationPrefab;
+
     // This dictionary stores the corresponding game objects of the nodes in the graph 
-    private Dictionary<INode, GameObject> nodePositions = new Dictionary<INode, GameObject>();
+    private Dictionary<INode, GameObject> nodes = new Dictionary<INode, GameObject>();
+
+    // This dictionary stores the corresponding game objects of the edges in the graph
+    private Dictionary<Triple, GameObject> edges = new Dictionary<Triple, GameObject>();
 
     // Start is called before the first frame update
     void Start() {
@@ -41,7 +55,7 @@ public class Visualization : MonoBehaviour {
                 GameObject nodeObject = Instantiate(nodePrefab, new Vector3(x, y, z), Quaternion.identity);
 
                 // Store the node object in the dictionary
-                nodePositions[node] = nodeObject;
+                nodes[node] = nodeObject;
 
                 // Set the scale of the node object
                 nodeObject.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -74,7 +88,7 @@ public class Visualization : MonoBehaviour {
         foreach (Triple edge in graph.Triples) {
 
             // Only create edges between uri nodes that were previously created
-            if (nodePositions.ContainsKey(edge.Subject) && nodePositions.ContainsKey(edge.Object)) {
+            if (nodes.ContainsKey(edge.Subject) && nodes.ContainsKey(edge.Object)) {
                 // Create a 3D line to represent the edge
                 GameObject edgeObject = new GameObject();
 
@@ -82,8 +96,8 @@ public class Visualization : MonoBehaviour {
                 LineRenderer lineRenderer = edgeObject.AddComponent<LineRenderer>();
 
                 // Set the position of the line's start and end points using the transforms of the node objects stored in the dictionary
-                lineRenderer.SetPosition(0, nodePositions[edge.Subject].transform.position);
-                lineRenderer.SetPosition(1, nodePositions[edge.Object].transform.position);
+                lineRenderer.SetPosition(0, nodes[edge.Subject].transform.position);
+                lineRenderer.SetPosition(1, nodes[edge.Object].transform.position);
 
                 // Set the width of the line
                 lineRenderer.startWidth = 0.1f;
@@ -96,7 +110,7 @@ public class Visualization : MonoBehaviour {
                 TextMesh text = edgeObject.AddComponent<TextMesh>();
 
                 // Calculate midpoint between the two nodes of the edge
-                Vector3 midpoint = Vector3.Lerp(nodePositions[edge.Subject].transform.position, nodePositions[edge.Object].transform.position, 0.5f);
+                Vector3 midpoint = Vector3.Lerp(nodes[edge.Subject].transform.position, nodes[edge.Object].transform.position, 0.5f);
                 edgeObject.transform.position = midpoint;
 
                 // Get a reference to the main camera in the scene
