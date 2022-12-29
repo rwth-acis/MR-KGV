@@ -42,14 +42,22 @@ public class Visualization : MonoBehaviour {
     /// Initialize the visualization of the given graph 'graph'
     /// </summary>
     public void InitializeGraph() {
-        // Loop through the nodes in the graph and create a 3D object for each one
+        // Loop through the nodes in the graph and create a node object for each one
         foreach (INode node in graph.Nodes) {
             // Only create nodes if it is a uri node
             if (node.NodeType == NodeType.Uri) {
-                // Generate random coordinates within the specified radius
-                float x = Random.Range(-radius, radius);
-                float y = Random.Range(-radius, radius);
-                float z = Random.Range(-radius, radius);
+                // Cast node
+                IUriNode uriNode = (IUriNode)node;
+
+                // If term node, do not create
+                if (uriNode.Uri.ToString() == "http://halle/ontology/Term") {
+                    break;
+                }
+
+                // Generate random coordinates within the specified radius around the center point
+                float x = Random.Range(-radius + center.transform.position.x, radius + center.transform.position.x);
+                float y = Random.Range(-radius + center.transform.position.y, radius + center.transform.position.y);
+                float z = Random.Range(-radius + center.transform.position.z, radius + center.transform.position.z);
 
                 // Create a node prefab at a random position within the specified radius
                 GameObject nodeObject = Instantiate(nodePrefab, new Vector3(x, y, z), Quaternion.identity);
@@ -60,73 +68,59 @@ public class Visualization : MonoBehaviour {
                 // Set the scale of the node object
                 nodeObject.transform.localScale = new Vector3(1f, 1f, 1f);
 
-                // Create a text label for the node
-                TextMesh text = new GameObject().AddComponent<TextMesh>();
+                // Get the text mesh of the node
+                TextMesh text = nodeObject.GetComponent<TextMesh>();
 
-                // Set the text of the label
-                IUriNode uriNode = (IUriNode)node;
+                // Set the text of the node label
                 text.text = SplitString(uriNode.Uri.ToString());
 
-                // Set the font size of the label
-                text.fontSize = 12;
+                // Get the script of the node object
+                Node nodeScript = nodeObject.GetComponent<Node>();
 
-                // Set the color of the label
-                text.color = Color.black;
-
-                // Set the position of the label
-                text.transform.position = nodeObject.transform.position;
-
-                // Set the rotation of the label to match the node object
-                text.transform.rotation = nodeObject.transform.rotation;
-
-                // Position the text in the middle of the node
-                text.anchor = TextAnchor.MiddleCenter;
+                // Store the uri of the node
+                nodeScript.uri = uriNode.Uri.ToString();
             }
         }
 
-        // Loop through the edges in the graph and create a 3D line for each one
+        // Loop through the triples in the graph and create an edge object for each one
         foreach (Triple edge in graph.Triples) {
-
             // Only create edges between uri nodes that were previously created
             if (nodes.ContainsKey(edge.Subject) && nodes.ContainsKey(edge.Object)) {
-                // Create a 3D line to represent the edge
-                GameObject edgeObject = new GameObject();
+                // Create an edge prefab
+                GameObject edgeObject = Instantiate(edgePrefab);
 
-                // Add a LineRenderer component to the edge object
-                LineRenderer lineRenderer = edgeObject.AddComponent<LineRenderer>();
+                // Store the edge object in the dictionary
+                edges[edge] = edgeObject;
 
-                // Set the position of the line's start and end points using the transforms of the node objects stored in the dictionary
+                // Get the line renderer of the edge
+                LineRenderer lineRenderer = edgeObject.GetComponent<LineRenderer>();
+
+                // Set the position of the line's start and end points using the positions stored in the dictionary
                 lineRenderer.SetPosition(0, nodes[edge.Subject].transform.position);
                 lineRenderer.SetPosition(1, nodes[edge.Object].transform.position);
 
-                // Set the width of the line
-                lineRenderer.startWidth = 0.1f;
-                lineRenderer.endWidth = 0.1f;
+                // Get the text mesh of the edge
+                TextMesh text = edgeObject.GetComponent<TextMesh>();
 
-                // Set color of the line
-                lineRenderer.material.color = new Color(1, 1, 1, 0.5f);
-
-                // Add a TextMesh component
-                TextMesh text = edgeObject.AddComponent<TextMesh>();
+                // Set the text of the uri node representing the predicate
+                IUriNode uriNode = (IUriNode)edge.Predicate;
+                text.text = SplitString(uriNode.Uri.ToString());
 
                 // Calculate midpoint between the two nodes of the edge
                 Vector3 midpoint = Vector3.Lerp(nodes[edge.Subject].transform.position, nodes[edge.Object].transform.position, 0.5f);
+
+                // Assign the position of the text to the midpoint
                 edgeObject.transform.position = midpoint;
 
-                // Get a reference to the main camera in the scene
-                Camera mainCamera = Camera.main;
+                // Get the script of the edge object
+                Edge edgeScript = edgeObject.GetComponent<Edge>();
 
-                // Set the rotation of the text object to the rotation of the camera
-                edgeObject.transform.rotation = mainCamera.transform.rotation;
+                // Store the subject and object node of the edge
+                edgeScript.subjectNode = nodes[edge.Subject];
+                edgeScript.objectNode = nodes[edge.Object];
 
-                // Position the text in the middle of the line
-                text.anchor = TextAnchor.MiddleCenter;
-
-                // Set the font size of the label
-                text.fontSize = 9;
-
-                // Set the text
-                text.text = "Test";
+                // Store the uri of the text
+                edgeScript.uri = uriNode.Uri.ToString();
             }
         }
     }
