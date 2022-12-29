@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 569532273}
   - component: {fileID: 569532272}
   m_Layer: 0
-  m_Name: InputHandler
+  m_Name: VisualizationHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

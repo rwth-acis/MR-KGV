@@ -4,7 +4,7 @@ using UnityEngine;
 using VDS.RDF;
 using VDS.RDF.Parsing;
 
-public class Input : MonoBehaviour {
+public class Visualization : MonoBehaviour {
 
     private IGraph graph;
 
