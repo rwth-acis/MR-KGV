@@ -39,6 +39,8 @@ public class Visualization : MonoBehaviour {
 
         InitializeImageRepresentation();
 
+        //UpdateNodePositions();
+
         //analyzeGraphNodes(graph);
     }
 
@@ -153,6 +155,44 @@ public class Visualization : MonoBehaviour {
 
     public void InitializeModelRepresentation() {
         // TODO
+    }
+
+    void UpdateNodePositions() {
+        foreach (GameObject node1 in nodes.Values) {
+            Vector3 netForce = Vector3.zero;
+
+            Rigidbody rigidBody = node1.GetComponent<Rigidbody>();
+
+            foreach (GameObject node2 in nodes.Values) {
+                if (node1 != node2) {
+                    netForce += repulsiveForce(node1, node2);
+                }
+            }
+            netForce += attractiveForce(node1);
+            //netForce += dampingForce(node1);
+            rigidBody.velocity += netForce * Time.deltaTime;
+            node1.transform.position += rigidBody.velocity * Time.deltaTime;
+        }
+    }
+
+    Vector3 repulsiveForce(GameObject node1, GameObject node2) {
+        float distance = Vector3.Distance(node1.transform.position, node2.transform.position);
+        Vector3 direction = (node2.transform.position - node1.transform.position).normalized;
+        float forceMagnitude = (2f * 2f) / (distance * distance);
+        return direction * forceMagnitude;
+    }
+
+    Vector3 attractiveForce(GameObject node) {
+        Vector3 direction = (center.transform.position - node.transform.position).normalized;
+        float distance = Vector3.Distance(node.transform.position, center.transform.position);
+        float forceMagnitude = distance * distance;
+        return direction * forceMagnitude;
+    }
+
+    Vector3 dampingForce(GameObject node) {
+        Rigidbody rigidBody = node.GetComponent<Rigidbody>();
+
+        return -rigidBody.velocity * 30;
     }
 
     /// <summary>

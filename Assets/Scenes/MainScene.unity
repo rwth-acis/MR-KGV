@@ -153,7 +153,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 25
-  nodePrefab: {fileID: 2760059082867781617, guid: c30f99d5d29a43349bc3f72224f511ff, type: 3}
+  center: {fileID: 702375705}
+  edgePrefab: {fileID: 3912623000122792806, guid: 0e9d086e363753148958b85d3aebadd6, type: 3}
+  nodePrefab: {fileID: 8444970688601854124, guid: c30f99d5d29a43349bc3f72224f511ff, type: 3}
+  sphereRepresentationPrefab: {fileID: 8898291421847044358, guid: 489e62be995d5e84da7fd7e2be86429f, type: 3}
+  imageRepresentationPrefab: {fileID: 5302251913898740929, guid: 3a67f57dcee9a5b49a0fabe4f958f5e6, type: 3}
 --- !u!4 &569532273
 Transform:
   m_ObjectHideFlags: 0
