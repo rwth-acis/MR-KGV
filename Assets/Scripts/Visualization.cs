@@ -35,7 +35,11 @@ public class Visualization : MonoBehaviour {
 
         InitializeGraph();
 
-        analyzeGraphNodes(graph);
+        InitializeSphereRepresentation();
+
+        InitializeImageRepresentation();
+
+        //analyzeGraphNodes(graph);
     }
 
     /// <summary>
@@ -123,6 +127,32 @@ public class Visualization : MonoBehaviour {
                 edgeScript.uri = uriNode.Uri.ToString();
             }
         }
+    }
+
+    public void InitializeSphereRepresentation() {
+
+        foreach (GameObject node in nodes.Values) {
+            GameObject sphereRepresentation = Instantiate(sphereRepresentationPrefab);
+
+            sphereRepresentation.transform.SetParent(node.transform);
+
+            sphereRepresentation.transform.position = node.transform.position; // transform main camera?
+        }
+    }
+
+    public void InitializeImageRepresentation() {
+
+        foreach (GameObject node in nodes.Values) {
+            GameObject imageRepresentation = Instantiate(imageRepresentationPrefab);
+
+            imageRepresentation.transform.SetParent(node.transform);
+
+            imageRepresentation.transform.position = node.transform.position; // transform main camera?
+        }
+    }
+
+    public void InitializeModelRepresentation() {
+        // TODO
     }
 
     /// <summary>
