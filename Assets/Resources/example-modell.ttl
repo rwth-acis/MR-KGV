@@ -1,0 +1,367 @@
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix halleOnt:  <http://halle/ontology/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix halleModel:  <http://halle/domainmodel/> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+halleModel:Papst  rdf:type  halleOnt:Term ;
+        rdfs:label        "Papst"@de ;
+        halleOnt:relates  halleModel:Eingreifen .
+
+halleModel:Eingreifen
+        rdf:type          halleOnt:Term ;
+        rdfs:label        "Eingreifen"@de ;
+        halleOnt:relates  halleModel:Papst .
+
+halleModel:Papst  halleOnt:relates  halleModel:Treffen .
+
+halleModel:Treffen  rdf:type  halleOnt:Term ;
+        rdfs:label        "Treffen"@de ;
+        halleOnt:relates  halleModel:Papst .
+
+halleModel:Papst  halleOnt:relates  halleModel:Alpen .
+
+halleModel:Alpen  rdf:type  halleOnt:Term ;
+        rdfs:label        "Alpen"@de ;
+        halleOnt:relates  halleModel:Papst .
+
+halleModel:Papst  halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  rdf:type  halleOnt:Term ;
+        rdfs:label        "Pippin"@de ;
+        halleOnt:relates  halleModel:Papst .
+
+halleModel:Papst  halleOnt:relates  halleModel:Frankenreich .
+
+halleModel:Frankenreich
+        rdf:type          halleOnt:Term ;
+        rdfs:label        "Frankenreich"@de ;
+        halleOnt:relates  halleModel:Papst .
+
+halleModel:Papst  halleOnt:relates  halleModel:Italien .
+
+halleModel:Italien  rdf:type  halleOnt:Term ;
+        rdfs:label        "Italien"@de ;
+        halleOnt:relates  halleModel:Papst .
+
+halleModel:Papst  halleOnt:relates  halleModel:Rom .
+
+halleModel:Rom  rdf:type  halleOnt:Term ;
+        rdfs:label        "Rom"@de ;
+        halleOnt:relates  halleModel:Papst .
+
+halleModel:Papst  halleOnt:relates  halleModel:Stephan .
+
+halleModel:Stephan  rdf:type  halleOnt:Term ;
+        rdfs:label        "Stephan"@de ;
+        halleOnt:relates  halleModel:Papst .
+
+halleModel:Könige  rdf:type  halleOnt:Term ;
+        rdfs:label        "Könige"@de ;
+        halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Könige .
+
+halleModel:Könige  halleOnt:relates  halleModel:Sohn .
+
+halleModel:Sohn  rdf:type  halleOnt:Term ;
+        rdfs:label        "Sohn"@de ;
+        halleOnt:relates  halleModel:Könige .
+
+halleModel:Könige  halleOnt:relates  halleModel:Karl .
+
+halleModel:Karl  rdf:type  halleOnt:Term ;
+        rdfs:label        "Karl"@de ;
+        halleOnt:relates  halleModel:Könige .
+
+halleModel:Eingreifen
+        halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Eingreifen .
+
+halleModel:Eingreifen
+        halleOnt:relates  halleModel:Italien .
+
+halleModel:Italien  halleOnt:relates  halleModel:Eingreifen .
+
+halleModel:Vita  rdf:type  halleOnt:Term ;
+        rdfs:label        "Vita"@de ;
+        halleOnt:relates  halleModel:Karoli .
+
+halleModel:Karoli  rdf:type  halleOnt:Term ;
+        rdfs:label        "Karoli"@de ;
+        halleOnt:relates  halleModel:Vita .
+
+halleModel:Namen  rdf:type  halleOnt:Term ;
+        rdfs:label        "Namen"@de ;
+        halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Namen .
+
+halleModel:Namen  halleOnt:relates  halleModel:Karl .
+
+halleModel:Karl  halleOnt:relates  halleModel:Namen .
+
+halleModel:Namen  halleOnt:relates  halleModel:Vater .
+
+halleModel:Vater  rdf:type  halleOnt:Term ;
+        rdfs:label        "Vater"@de ;
+        halleOnt:relates  halleModel:Namen .
+
+halleModel:Namen  halleOnt:relates  halleModel:Namensgebung .
+
+halleModel:Namensgebung
+        rdf:type          halleOnt:Term ;
+        rdfs:label        "Namensgebung"@de ;
+        halleOnt:relates  halleModel:Namen .
+
+halleModel:Martell  rdf:type  halleOnt:Term ;
+        rdfs:label        "Martell"@de ;
+        halleOnt:relates  halleModel:Karl .
+
+halleModel:Karl  halleOnt:relates  halleModel:Martell .
+
+halleModel:Zeit  rdf:type  halleOnt:Term ;
+        rdfs:label        "Zeit"@de ;
+        halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Zeit .
+
+halleModel:Jahr  rdf:type  halleOnt:Term ;
+        rdfs:label        "Jahr"@de ;
+        halleOnt:relates  halleModel:Stephan .
+
+halleModel:Stephan  halleOnt:relates  halleModel:Jahr .
+
+halleModel:Einhard  rdf:type  halleOnt:Term ;
+        rdfs:label        "Einhard"@de ;
+        halleOnt:relates  halleModel:Vertrautem .
+
+halleModel:Vertrautem
+        rdf:type          halleOnt:Term ;
+        rdfs:label        "Vertrautem"@de ;
+        halleOnt:relates  halleModel:Einhard .
+
+halleModel:Alpen  halleOnt:relates  halleModel:Frankenreich .
+
+halleModel:Frankenreich
+        halleOnt:relates  halleModel:Alpen .
+
+halleModel:Wert  rdf:type  halleOnt:Term ;
+        rdfs:label        "Wert"@de ;
+        halleOnt:relates  halleModel:Bildung .
+
+halleModel:Bildung  rdf:type  halleOnt:Term ;
+        rdfs:label        "Bildung"@de ;
+        halleOnt:relates  halleModel:Wert .
+
+halleModel:Vertrautem
+        halleOnt:relates  halleModel:Karl .
+
+halleModel:Karl  halleOnt:relates  halleModel:Vertrautem .
+
+halleModel:Jugend  rdf:type  halleOnt:Term ;
+        rdfs:label        "Jugend"@de ;
+        halleOnt:relates  halleModel:Karl .
+
+halleModel:Karl  halleOnt:relates  halleModel:Jugend .
+
+halleModel:Bündnis  rdf:type  halleOnt:Term ;
+        rdfs:label        "Bündnis"@de ;
+        halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Bündnis .
+
+halleModel:Karlmann  rdf:type  halleOnt:Term ;
+        rdfs:label        "Karlmann"@de ;
+        halleOnt:relates  halleModel:Karl .
+
+halleModel:Karl  halleOnt:relates  halleModel:Karlmann .
+
+halleModel:Karlmann  halleOnt:relates  halleModel:Bruder .
+
+halleModel:Bruder  rdf:type  halleOnt:Term ;
+        rdfs:label        "Bruder"@de ;
+        halleOnt:relates  halleModel:Karlmann .
+
+halleModel:Leben  rdf:type  halleOnt:Term ;
+        rdfs:label        "Leben"@de ;
+        halleOnt:relates  halleModel:Karl .
+
+halleModel:Karl  halleOnt:relates  halleModel:Leben .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Königtums .
+
+halleModel:Königtums  rdf:type  halleOnt:Term ;
+        rdfs:label        "Königtums"@de ;
+        halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Italien .
+
+halleModel:Italien  halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Jüngeren .
+
+halleModel:Jüngeren  rdf:type  halleOnt:Term ;
+        rdfs:label        "Jüngeren"@de ;
+        halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Bertrada .
+
+halleModel:Bertrada  rdf:type  halleOnt:Term ;
+        rdfs:label        "Bertrada"@de ;
+        halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Sohn .
+
+halleModel:Sohn  halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Stephan .
+
+halleModel:Stephan  halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Karl .
+
+halleModel:Karl  halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Vater .
+
+halleModel:Vater  halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Grabmal .
+
+halleModel:Grabmal  rdf:type  halleOnt:Term ;
+        rdfs:label        "Grabmal"@de ;
+        halleOnt:relates  halleModel:Pippin .
+
+halleModel:Pippin  halleOnt:relates  halleModel:Saint-denis .
+
+halleModel:Saint-denis
+        rdf:type          halleOnt:Term ;
+        rdfs:label        "Saint-denis"@de ;
+        halleOnt:relates  halleModel:Pippin .
+
+halleModel:Austrasien
+        rdf:type          halleOnt:Term ;
+        rdfs:label        "Austrasien"@de ;
+        halleOnt:relates  halleModel:Reichsteil .
+
+halleModel:Reichsteil
+        rdf:type          halleOnt:Term ;
+        rdfs:label        "Reichsteil"@de ;
+        halleOnt:relates  halleModel:Austrasien .
+
+halleModel:Annales  rdf:type  halleOnt:Term ;
+        rdfs:label        "Annales"@de ;
+        halleOnt:relates  halleModel:Regni .
+
+halleModel:Regni  rdf:type  halleOnt:Term ;
+        rdfs:label        "Regni"@de ;
+        halleOnt:relates  halleModel:Annales .
+
+halleModel:Karoli  halleOnt:relates  halleModel:Magni .
+
+halleModel:Magni  rdf:type  halleOnt:Term ;
+        rdfs:label        "Magni"@de ;
+        halleOnt:relates  halleModel:Karoli .
+
+halleModel:Aistulf  rdf:type  halleOnt:Term ;
+        rdfs:label        "Aistulf"@de ;
+        halleOnt:relates  halleModel:Langobardenkönigs .
+
+halleModel:Langobardenkönigs
+        rdf:type          halleOnt:Term ;
+        rdfs:label        "Langobardenkönigs"@de ;
+        halleOnt:relates  halleModel:Aistulf .
+
+halleModel:Jüngeren  halleOnt:relates  halleModel:Bertrada .
+
+halleModel:Bertrada  halleOnt:relates  halleModel:Jüngeren ;
+        halleOnt:relates  halleModel:Ehefrau .
+
+halleModel:Ehefrau  rdf:type  halleOnt:Term ;
+        rdfs:label        "Ehefrau"@de ;
+        halleOnt:relates  halleModel:Bertrada .
+
+halleModel:Bertrada  halleOnt:relates  halleModel:Frau .
+
+halleModel:Frau  rdf:type  halleOnt:Term ;
+        rdfs:label        "Frau"@de ;
+        halleOnt:relates  halleModel:Bertrada .
+
+halleModel:Klosters  rdf:type  halleOnt:Term ;
+        rdfs:label        "Klosters"@de ;
+        halleOnt:relates  halleModel:Lorsch .
+
+halleModel:Lorsch  rdf:type  halleOnt:Term ;
+        rdfs:label        "Lorsch"@de ;
+        halleOnt:relates  halleModel:Klosters .
+
+halleModel:Karolinger
+        rdf:type          halleOnt:Term ;
+        rdfs:label        "Karolinger"@de ;
+        halleOnt:relates  halleModel:Karl .
+
+halleModel:Karl  halleOnt:relates  halleModel:Karolinger .
+
+halleModel:Karolinger
+        halleOnt:relates  halleModel:Familie .
+
+halleModel:Familie  rdf:type  halleOnt:Term ;
+        rdfs:label        "Familie"@de ;
+        halleOnt:relates  halleModel:Karolinger .
+
+halleModel:Childerich
+        rdf:type          halleOnt:Term ;
+        rdfs:label        "Childerich"@de ;
+        halleOnt:relates  halleModel:Merowingerkönig .
+
+halleModel:Merowingerkönig
+        rdf:type          halleOnt:Term ;
+        rdfs:label        "Merowingerkönig"@de ;
+        halleOnt:relates  halleModel:Childerich .
+
+halleModel:Sohn  halleOnt:relates  halleModel:Karl .
+
+halleModel:Karl  halleOnt:relates  halleModel:Sohn .
+
+halleModel:Schwester  rdf:type  halleOnt:Term ;
+        rdfs:label        "Schwester"@de ;
+        halleOnt:relates  halleModel:Gisela .
+
+halleModel:Gisela  rdf:type  halleOnt:Term ;
+        rdfs:label        "Gisela"@de ;
+        halleOnt:relates  halleModel:Schwester .
+
+halleModel:Karl  halleOnt:relates  halleModel:Vater .
+
+halleModel:Vater  halleOnt:relates  halleModel:Karl .
+
+halleModel:Karl  halleOnt:relates  halleModel:Familie .
+
+halleModel:Familie  halleOnt:relates  halleModel:Karl .
+
+halleModel:Karl  halleOnt:relates  halleModel:Kindheit .
+
+halleModel:Kindheit  rdf:type  halleOnt:Term ;
+        rdfs:label        "Kindheit"@de ;
+        halleOnt:relates  halleModel:Karl .
+
+halleModel:Karl  halleOnt:relates  halleModel:Bruder .
+
+halleModel:Bruder  halleOnt:relates  halleModel:Karl .
+
+halleModel:Patricius  rdf:type  halleOnt:Term ;
+        rdfs:label        "Patricius"@de ;
+        halleOnt:relates  halleModel:Ehrentitel .
+
+halleModel:Ehrentitel
+        rdf:type          halleOnt:Term ;
+        rdfs:label        "Ehrentitel"@de ;
+        halleOnt:relates  halleModel:Patricius .
+
+halleModel:Regni  halleOnt:relates  halleModel:Francorum .
+
+halleModel:Francorum  rdf:type  halleOnt:Term ;
+        rdfs:label        "Francorum"@de ;
+        halleOnt:relates  halleModel:Regni .

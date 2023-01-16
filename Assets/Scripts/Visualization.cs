@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using VDS.RDF;
 using VDS.RDF.Parsing;
+using System.IO;
+using System.Net;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class Visualization : MonoBehaviour {
 
@@ -13,7 +17,7 @@ public class Visualization : MonoBehaviour {
     public float radius;
 
     // Center point of the graph visualization; used in layout
-    public GameObject center;
+    public GameObject centerPoint;
 
     public GameObject edgePrefab;
 
@@ -29,19 +33,57 @@ public class Visualization : MonoBehaviour {
     // This dictionary stores the corresponding game objects of the edges in the graph
     private Dictionary<Triple, GameObject> edges = new Dictionary<Triple, GameObject>();
 
+    // AR UI related
+    public ARRaycastManager raycastManager;
+
+    public ARPlaneManager arPlaneManager;
+
+    public Camera arCamera;
+
+    private List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+    private bool graphSet;
+
     // Start is called before the first frame update
     void Start() {
-        ReadTurtleFile("Assets/Files/example-modell.ttl");
+        string savingPath = Application.persistentDataPath + "/rdf";
 
-        InitializeGraph();
+        Directory.CreateDirectory(savingPath);
 
-        InitializeSphereRepresentation();
+        string loadPath = savingPath + "/example-modell.ttl";
 
-        InitializeImageRepresentation();
+        ReadTurtleFile(loadPath);
+    }
 
-        //UpdateNodePositions();
+    void Update() {
+        Ray ray = arCamera.ScreenPointToRay(Input.mousePosition);
 
-        //analyzeGraphNodes(graph);
+        if (Input.GetMouseButton(0) && !graphSet) {
+            if (raycastManager.Raycast(ray, hits, TrackableType.Planes)) {
+                Pose hitPose = hits[0].pose;
+
+                // Change center point position based on user input
+                centerPoint.transform.position = hitPose.position + new Vector3(0, 1.2f, 0);
+
+                //centerPoint = Instantiate(new GameObject(), hitPose.position + new Vector3(0, 1, 0), hitPose.rotation);
+
+                // Initialize Graph + Representations
+                InitializeGraph();
+                InitializeSphereRepresentation();
+                InitializeImageRepresentation();
+
+                graphSet = true;
+                DeactivatePlaneManager();
+            }
+        }
+    }
+
+    public void DeactivatePlaneManager() {
+        arPlaneManager.enabled = false;
+
+        foreach (ARPlane plane in arPlaneManager.trackables) {
+            plane.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -61,9 +103,9 @@ public class Visualization : MonoBehaviour {
                 }
 
                 // Generate random coordinates within the specified radius around the center point
-                float x = Random.Range(-radius + center.transform.position.x, radius + center.transform.position.x);
-                float y = Random.Range(-radius + center.transform.position.y, radius + center.transform.position.y);
-                float z = Random.Range(-radius + center.transform.position.z, radius + center.transform.position.z);
+                float x = Random.Range(-radius + centerPoint.transform.position.x, radius + centerPoint.transform.position.x);
+                float y = Random.Range(-radius + centerPoint.transform.position.y, radius + centerPoint.transform.position.y);
+                float z = Random.Range(-radius + centerPoint.transform.position.z, radius + centerPoint.transform.position.z);
 
                 // Create a node prefab at a random position within the specified radius
                 GameObject nodeObject = Instantiate(nodePrefab, new Vector3(x, y, z), Quaternion.identity);
@@ -72,7 +114,7 @@ public class Visualization : MonoBehaviour {
                 nodes[node] = nodeObject;
 
                 // Set the scale of the node object
-                nodeObject.transform.localScale = new Vector3(1f, 1f, 1f);
+                nodeObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 
                 // Get the text mesh of the node
                 TextMesh text = nodeObject.GetComponent<TextMesh>();
@@ -85,6 +127,10 @@ public class Visualization : MonoBehaviour {
 
                 // Store the uri of the node
                 nodeScript.uri = uriNode.Uri.ToString();
+
+                // Sharpen the text by resizing it
+                text.fontSize = 150;
+                text.characterSize = .02f;
             }
         }
 
@@ -110,13 +156,13 @@ public class Visualization : MonoBehaviour {
 
                 // Set the text of the uri node representing the predicate
                 IUriNode uriNode = (IUriNode)edge.Predicate;
-                text.text = SplitString(uriNode.Uri.ToString());
+                //text.text = SplitString(uriNode.Uri.ToString());
 
                 // Calculate midpoint between the two nodes of the edge
-                Vector3 midpoint = Vector3.Lerp(nodes[edge.Subject].transform.position, nodes[edge.Object].transform.position, 0.5f);
+                //Vector3 midpoint = Vector3.Lerp(nodes[edge.Subject].transform.position, nodes[edge.Object].transform.position, 0.5f);
 
                 // Assign the position of the text to the midpoint
-                edgeObject.transform.position = midpoint;
+                //edgeObject.transform.position = midpoint;
 
                 // Get the script of the edge object
                 Edge edgeScript = edgeObject.GetComponent<Edge>();
@@ -127,6 +173,17 @@ public class Visualization : MonoBehaviour {
 
                 // Store the uri of the text
                 edgeScript.uri = uriNode.Uri.ToString();
+
+                // Store edge in edge list of adjacent nodes
+                Node subjectNode = nodes[edge.Subject].GetComponent<Node>();
+                Node objectNode = nodes[edge.Object].GetComponent<Node>();
+
+                subjectNode.edges.Add(edgeObject);
+                objectNode.edges.Add(edgeObject);
+
+                // Make the edge less wide
+                lineRenderer.startWidth = 0.04f;
+                lineRenderer.endWidth = 0.04f;
             }
         }
     }
@@ -157,6 +214,27 @@ public class Visualization : MonoBehaviour {
         // TODO
     }
 
+    public void ActivateSphereRepresentation() {
+        foreach (GameObject node in nodes.Values) {
+            // Activate sphere representation
+            node.transform.Find("SphereRepresentation(Clone)").gameObject.SetActive(true);
+
+            // Deactivate image representation
+            node.transform.Find("ImageRepresentation(Clone)").gameObject.SetActive(false);
+        }
+    }
+
+    // TODO: Only activate image, deactivate sphere representation for nodes with image URL
+    public void ActivateImageRepresentation() {
+        foreach (GameObject node in nodes.Values) {
+            // Deactivate sphere representation
+            node.transform.Find("SphereRepresentation(Clone)").gameObject.SetActive(false);
+
+            // Activate image representation
+            node.transform.Find("ImageRepresentation(Clone)").gameObject.SetActive(true);
+        }
+    }
+
     void UpdateNodePositions() {
         foreach (GameObject node1 in nodes.Values) {
             Vector3 netForce = Vector3.zero;
@@ -183,8 +261,8 @@ public class Visualization : MonoBehaviour {
     }
 
     Vector3 attractiveForce(GameObject node) {
-        Vector3 direction = (center.transform.position - node.transform.position).normalized;
-        float distance = Vector3.Distance(node.transform.position, center.transform.position);
+        Vector3 direction = (centerPoint.transform.position - node.transform.position).normalized;
+        float distance = Vector3.Distance(node.transform.position, centerPoint.transform.position);
         float forceMagnitude = distance * distance;
         return direction * forceMagnitude;
     }

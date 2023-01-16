@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9711b690174621d4ebb786bb9696a209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  subjectNode: {fileID: 0}
+  objectNode: {fileID: 0}
+  uri: 
 --- !u!120 &4646079109255113233
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -203,7 +206,7 @@ TextMesh:
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 9
+  m_FontSize: 7
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 0}

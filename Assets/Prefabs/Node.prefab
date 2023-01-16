@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae2a527f8a61b24889d6f1c2070b310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  annotation: 
+  uri: 
+  imageURL: 
+  edges: []
 --- !u!23 &7964047146029101203
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -104,10 +108,10 @@ TextMesh:
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 12
+  m_FontSize: 10
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 0}
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
     rgba: 4278190080

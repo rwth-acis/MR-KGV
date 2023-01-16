@@ -1,0 +1,536 @@
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix halleOnt:  <http://halle/ontology/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix halleModel:  <http://halle/domainmodel/> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+halleModel:Papst  rdf:type  halleOnt:Term ;
+        rdfs:label  "Papst"@de .
+
+halleModel:Eingreifen
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Eingreifen"@de .
+
+halleModel:84e7cbbc-142e-432e-9898-40adb2f09437
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Papst ;
+        halleOnt:relatedTerm  halleModel:Eingreifen ;
+        halleOnt:weight       "0.330434782608696"^^xsd:float .
+
+halleModel:Treffen  rdf:type  halleOnt:Term ;
+        rdfs:label  "Treffen"@de .
+
+halleModel:39386235-0fe8-40ab-b4b3-55a1d006829e
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Papst ;
+        halleOnt:relatedTerm  halleModel:Treffen ;
+        halleOnt:weight       "0.378260869565217"^^xsd:float .
+
+halleModel:Alpen  rdf:type  halleOnt:Term ;
+        rdfs:label  "Alpen"@de .
+
+halleModel:20b32b1b-c557-4a84-ac2a-2e8e2223e7c2
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Papst ;
+        halleOnt:relatedTerm  halleModel:Alpen ;
+        halleOnt:weight       "0.395652173913044"^^xsd:float .
+
+halleModel:Pippin  rdf:type  halleOnt:Term ;
+        rdfs:label  "Pippin"@de .
+
+halleModel:0e5ec502-ca26-452d-91e4-bdadc4b3b1e1
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Papst ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:weight       "0.573913043478261"^^xsd:float .
+
+halleModel:Frankenreich
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Frankenreich"@de .
+
+halleModel:5a9b431b-9dd7-4d53-99a6-a898f02dc5d7
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Papst ;
+        halleOnt:relatedTerm  halleModel:Frankenreich ;
+        halleOnt:weight       "0.295652173913043"^^xsd:float .
+
+halleModel:Italien  rdf:type  halleOnt:Term ;
+        rdfs:label  "Italien"@de .
+
+halleModel:59861873-3c4e-4c67-83b0-9c9030e51c85
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Papst ;
+        halleOnt:relatedTerm  halleModel:Italien ;
+        halleOnt:weight       "0.391304347826087"^^xsd:float .
+
+halleModel:Rom  rdf:type  halleOnt:Term ;
+        rdfs:label  "Rom"@de .
+
+halleModel:d60f3dd2-3ea5-4b6c-a386-e10025b3ccd8
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Papst ;
+        halleOnt:relatedTerm  halleModel:Rom ;
+        halleOnt:weight       "0.334782608695652"^^xsd:float .
+
+halleModel:Stephan  rdf:type  halleOnt:Term ;
+        rdfs:label  "Stephan"@de .
+
+halleModel:670c6874-7712-400f-a06c-84a60161817c
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Papst ;
+        halleOnt:relatedTerm  halleModel:Stephan ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:Könige  rdf:type  halleOnt:Term ;
+        rdfs:label  "Könige"@de .
+
+halleModel:f66f9c3b-c153-4c31-8853-0113899a7a10
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Könige ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:weight       "0.326086956521739"^^xsd:float .
+
+halleModel:Sohn  rdf:type  halleOnt:Term ;
+        rdfs:label  "Sohn"@de .
+
+halleModel:cae986e8-0d63-43c0-a0ef-98745886897e
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Könige ;
+        halleOnt:relatedTerm  halleModel:Sohn ;
+        halleOnt:weight       "0.339130434782609"^^xsd:float .
+
+halleModel:Karl  rdf:type  halleOnt:Term ;
+        rdfs:label  "Karl"@de .
+
+halleModel:e4721155-ff62-49c3-8adb-d0566ef058ad
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Könige ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:weight       "0.334782608695652"^^xsd:float .
+
+halleModel:9c7aa1d4-3c73-43a1-899b-9b534f24e2e9
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Eingreifen ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:weight       "0.521739130434783"^^xsd:float .
+
+halleModel:61982bf9-7ddd-4ea1-95af-b6129b39365d
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Eingreifen ;
+        halleOnt:relatedTerm  halleModel:Italien ;
+        halleOnt:weight       "0.339130434782609"^^xsd:float .
+
+halleModel:Vita  rdf:type  halleOnt:Term ;
+        rdfs:label  "Vita"@de .
+
+halleModel:Karoli  rdf:type  halleOnt:Term ;
+        rdfs:label  "Karoli"@de .
+
+halleModel:cab44c72-8251-44fc-94ad-2429728d6594
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Vita ;
+        halleOnt:relatedTerm  halleModel:Karoli ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:Namen  rdf:type  halleOnt:Term ;
+        rdfs:label  "Namen"@de .
+
+halleModel:812979bc-5d92-40c1-ae51-221ee2f8940e
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Namen ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:weight       "0.61304347826087"^^xsd:float .
+
+halleModel:48aadda2-bc25-4485-9a09-1895a4be134f
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Namen ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:weight       "0.391304347826087"^^xsd:float .
+
+halleModel:Vater  rdf:type  halleOnt:Term ;
+        rdfs:label  "Vater"@de .
+
+halleModel:ea76845f-5484-48c9-933d-0666fb0a2b5d
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Namen ;
+        halleOnt:relatedTerm  halleModel:Vater ;
+        halleOnt:weight       "0.378260869565217"^^xsd:float .
+
+halleModel:Namensgebung
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Namensgebung"@de .
+
+halleModel:722c7830-a4e3-4378-84af-d5965e48fdd7
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Namen ;
+        halleOnt:relatedTerm  halleModel:Namensgebung ;
+        halleOnt:weight       "0.317391304347826"^^xsd:float .
+
+halleModel:Martell  rdf:type  halleOnt:Term ;
+        rdfs:label  "Martell"@de .
+
+halleModel:2697d6be-5999-462a-bace-9945c276dbff
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Martell ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:weight       "0.417391304347826"^^xsd:float .
+
+halleModel:Zeit  rdf:type  halleOnt:Term ;
+        rdfs:label  "Zeit"@de .
+
+halleModel:b93c0e1b-1676-4850-8e2d-f02d3cf42896
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Zeit ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:Jahr  rdf:type  halleOnt:Term ;
+        rdfs:label  "Jahr"@de .
+
+halleModel:a4bc376e-5579-4583-968a-a5da19b997c5
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Jahr ;
+        halleOnt:relatedTerm  halleModel:Stephan ;
+        halleOnt:weight       "0.369565217391304"^^xsd:float .
+
+halleModel:Einhard  rdf:type  halleOnt:Term ;
+        rdfs:label  "Einhard"@de .
+
+halleModel:Vertrautem
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Vertrautem"@de .
+
+halleModel:8957b527-ff94-48b6-ad04-f49da66af3eb
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Einhard ;
+        halleOnt:relatedTerm  halleModel:Vertrautem ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:507be06e-d631-47a3-b3fb-30c69ebda55a
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Alpen ;
+        halleOnt:relatedTerm  halleModel:Frankenreich ;
+        halleOnt:weight       "0.326086956521739"^^xsd:float .
+
+halleModel:Wert  rdf:type  halleOnt:Term ;
+        rdfs:label  "Wert"@de .
+
+halleModel:Bildung  rdf:type  halleOnt:Term ;
+        rdfs:label  "Bildung"@de .
+
+halleModel:71c6d124-bffb-4824-9196-a76c4e7302a9
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Wert ;
+        halleOnt:relatedTerm  halleModel:Bildung ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:842a703b-d46a-43d7-9990-e742021b9f8d
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Vertrautem ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:Jugend  rdf:type  halleOnt:Term ;
+        rdfs:label  "Jugend"@de .
+
+halleModel:bd933021-56ea-436b-b586-5551b12c9f83
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Jugend ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:weight       "0.417391304347826"^^xsd:float .
+
+halleModel:Bündnis  rdf:type  halleOnt:Term ;
+        rdfs:label  "Bündnis"@de .
+
+halleModel:d3a4d9b1-8f4e-478c-b3bf-cee09363d985
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Bündnis ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:weight       "0.391304347826087"^^xsd:float .
+
+halleModel:Karlmann  rdf:type  halleOnt:Term ;
+        rdfs:label  "Karlmann"@de .
+
+halleModel:e648c858-df14-404c-a5b7-255916c50afe
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Karlmann ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:weight       "0.395652173913044"^^xsd:float .
+
+halleModel:Bruder  rdf:type  halleOnt:Term ;
+        rdfs:label  "Bruder"@de .
+
+halleModel:79591fcd-097d-4154-8786-22738d0f02af
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Karlmann ;
+        halleOnt:relatedTerm  halleModel:Bruder ;
+        halleOnt:weight       "0.41304347826087"^^xsd:float .
+
+halleModel:Leben  rdf:type  halleOnt:Term ;
+        rdfs:label  "Leben"@de .
+
+halleModel:e5bbf438-c7ba-4b86-a171-b137113bb7f2
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Leben ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:weight       "0.369565217391304"^^xsd:float .
+
+halleModel:Königtums  rdf:type  halleOnt:Term ;
+        rdfs:label  "Königtums"@de .
+
+halleModel:955d4e1b-2080-4e05-aa12-83e8162784e8
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:relatedTerm  halleModel:Königtums ;
+        halleOnt:weight       "0.317391304347826"^^xsd:float .
+
+halleModel:da5af718-ca90-4fa8-a207-b0f419c57a0d
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:relatedTerm  halleModel:Italien ;
+        halleOnt:weight       "0.391304347826087"^^xsd:float .
+
+halleModel:Jüngeren  rdf:type  halleOnt:Term ;
+        rdfs:label  "Jüngeren"@de .
+
+halleModel:d5132998-d7b0-4b8a-b2b1-729738af30e8
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:relatedTerm  halleModel:Jüngeren ;
+        halleOnt:weight       "0.408695652173913"^^xsd:float .
+
+halleModel:Bertrada  rdf:type  halleOnt:Term ;
+        rdfs:label  "Bertrada"@de .
+
+halleModel:8467980d-9792-489e-b9e4-05a2e144b227
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:relatedTerm  halleModel:Bertrada ;
+        halleOnt:weight       "0.326086956521739"^^xsd:float .
+
+halleModel:e7498373-ae05-4532-af1d-4dc33be29908
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:relatedTerm  halleModel:Sohn ;
+        halleOnt:weight       "1"^^xsd:float .
+
+halleModel:eb192d4d-1dac-4f7a-ba26-5c3a57ffe339
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:relatedTerm  halleModel:Stephan ;
+        halleOnt:weight       "0.365217391304348"^^xsd:float .
+
+halleModel:e0cdb8f9-3054-4871-8599-8541f763ae35
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:weight       "0.769565217391304"^^xsd:float .
+
+halleModel:5bcc4ce3-852f-48bd-b2df-6ea4e0c21fb3
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:relatedTerm  halleModel:Vater ;
+        halleOnt:weight       "0.391304347826087"^^xsd:float .
+
+halleModel:Grabmal  rdf:type  halleOnt:Term ;
+        rdfs:label  "Grabmal"@de .
+
+halleModel:139c3604-92ef-4bee-b7ab-937904676f7f
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:relatedTerm  halleModel:Grabmal ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:Saint-denis
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Saint-denis"@de .
+
+halleModel:9f41191d-1734-43c1-898b-fd39d1a899bb
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Pippin ;
+        halleOnt:relatedTerm  halleModel:Saint-denis ;
+        halleOnt:weight       "0.339130434782609"^^xsd:float .
+
+halleModel:Austrasien
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Austrasien"@de .
+
+halleModel:Reichsteil
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Reichsteil"@de .
+
+halleModel:12998f0d-fe5a-4457-a3b9-5713d525fbe8
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Austrasien ;
+        halleOnt:relatedTerm  halleModel:Reichsteil ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:Annales  rdf:type  halleOnt:Term ;
+        rdfs:label  "Annales"@de .
+
+halleModel:Regni  rdf:type  halleOnt:Term ;
+        rdfs:label  "Regni"@de .
+
+halleModel:b82f19f6-b87e-4a68-81d1-39c6fd4f752f
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Annales ;
+        halleOnt:relatedTerm  halleModel:Regni ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:Magni  rdf:type  halleOnt:Term ;
+        rdfs:label  "Magni"@de .
+
+halleModel:15d773d2-95c8-407b-8b19-4f6ed1e5f02c
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Karoli ;
+        halleOnt:relatedTerm  halleModel:Magni ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:Aistulf  rdf:type  halleOnt:Term ;
+        rdfs:label  "Aistulf"@de .
+
+halleModel:Langobardenkönigs
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Langobardenkönigs"@de .
+
+halleModel:2f407e2c-88ef-49fb-a728-7693eee05f50
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Aistulf ;
+        halleOnt:relatedTerm  halleModel:Langobardenkönigs ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:4cdf0a74-015b-4897-91a5-41261f7420a7
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Jüngeren ;
+        halleOnt:relatedTerm  halleModel:Bertrada ;
+        halleOnt:weight       "0.343478260869565"^^xsd:float .
+
+halleModel:Ehefrau  rdf:type  halleOnt:Term ;
+        rdfs:label  "Ehefrau"@de .
+
+halleModel:93d491f7-9bdd-4c22-ba89-056d142235d4
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Bertrada ;
+        halleOnt:relatedTerm  halleModel:Ehefrau ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:Frau  rdf:type  halleOnt:Term ;
+        rdfs:label  "Frau"@de .
+
+halleModel:a5cf305d-b28e-40f1-bb36-bdc42fef37b5
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Bertrada ;
+        halleOnt:relatedTerm  halleModel:Frau ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:Klosters  rdf:type  halleOnt:Term ;
+        rdfs:label  "Klosters"@de .
+
+halleModel:Lorsch  rdf:type  halleOnt:Term ;
+        rdfs:label  "Lorsch"@de .
+
+halleModel:8d218a2e-591d-4d4e-bdc2-d5e12d5e0153
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Klosters ;
+        halleOnt:relatedTerm  halleModel:Lorsch ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:Karolinger
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Karolinger"@de .
+
+halleModel:a81800bc-9f72-44bb-886d-2a7f3a3df5bc
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Karolinger ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:weight       "0.356521739130435"^^xsd:float .
+
+halleModel:Familie  rdf:type  halleOnt:Term ;
+        rdfs:label  "Familie"@de .
+
+halleModel:b22c79da-9fdc-4dee-b0df-ff472ed057df
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Karolinger ;
+        halleOnt:relatedTerm  halleModel:Familie ;
+        halleOnt:weight       "0.408695652173913"^^xsd:float .
+
+halleModel:Childerich
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Childerich"@de .
+
+halleModel:Merowingerkönig
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Merowingerkönig"@de .
+
+halleModel:675c21e3-fd27-44ba-8d31-78a81e5d7ec4
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Childerich ;
+        halleOnt:relatedTerm  halleModel:Merowingerkönig ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:417eaf56-628f-406e-9531-c15cb96888cb
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Sohn ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:weight       "0.395652173913044"^^xsd:float .
+
+halleModel:Schwester  rdf:type  halleOnt:Term ;
+        rdfs:label  "Schwester"@de .
+
+halleModel:Gisela  rdf:type  halleOnt:Term ;
+        rdfs:label  "Gisela"@de .
+
+halleModel:1644fc84-2005-43ab-b0d3-6ca76e6e0104
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Schwester ;
+        halleOnt:relatedTerm  halleModel:Gisela ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:3cffe12e-f033-478c-b27d-c377ff2be09b
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:relatedTerm  halleModel:Vater ;
+        halleOnt:weight       "0.395652173913044"^^xsd:float .
+
+halleModel:2f32d96d-1e0f-41d8-a679-6b783708b85c
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:relatedTerm  halleModel:Familie ;
+        halleOnt:weight       "0.547826086956522"^^xsd:float .
+
+halleModel:Kindheit  rdf:type  halleOnt:Term ;
+        rdfs:label  "Kindheit"@de .
+
+halleModel:491f805e-1683-4996-ac0d-48fdc449f442
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:relatedTerm  halleModel:Kindheit ;
+        halleOnt:weight       "0.38695652173913"^^xsd:float .
+
+halleModel:40f9f27c-1190-467a-88cc-901c05c9fe2d
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Karl ;
+        halleOnt:relatedTerm  halleModel:Bruder ;
+        halleOnt:weight       "0.408695652173913"^^xsd:float .
+
+halleModel:Patricius  rdf:type  halleOnt:Term ;
+        rdfs:label  "Patricius"@de .
+
+halleModel:Ehrentitel
+        rdf:type    halleOnt:Term ;
+        rdfs:label  "Ehrentitel"@de .
+
+halleModel:5941833b-d40c-4d67-8461-4f29a04ea36b
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Patricius ;
+        halleOnt:relatedTerm  halleModel:Ehrentitel ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
+
+halleModel:Francorum  rdf:type  halleOnt:Term ;
+        rdfs:label  "Francorum"@de .
+
+halleModel:de70dc73-8f47-4028-adfe-a0875bc4d15e
+        rdf:type              halleOnt:WeightedRelation ;
+        halleOnt:relatedTerm  halleModel:Regni ;
+        halleOnt:relatedTerm  halleModel:Francorum ;
+        halleOnt:weight       "0.208695652173913"^^xsd:float .
