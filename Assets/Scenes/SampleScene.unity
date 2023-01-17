@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 761a0942dcf7d00409a27fb945715b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 5
   centerPoint: {fileID: 1669875425}
   edgePrefab: {fileID: 3912623000122792806, guid: 0e9d086e363753148958b85d3aebadd6, type: 3}
   nodePrefab: {fileID: 8444970688601854124, guid: c30f99d5d29a43349bc3f72224f511ff, type: 3}

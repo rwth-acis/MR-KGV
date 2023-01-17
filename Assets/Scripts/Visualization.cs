@@ -156,13 +156,13 @@ public class Visualization : MonoBehaviour {
 
                 // Set the text of the uri node representing the predicate
                 IUriNode uriNode = (IUriNode)edge.Predicate;
-                //text.text = SplitString(uriNode.Uri.ToString());
+                text.text = SplitString(uriNode.Uri.ToString());
 
                 // Calculate midpoint between the two nodes of the edge
-                //Vector3 midpoint = Vector3.Lerp(nodes[edge.Subject].transform.position, nodes[edge.Object].transform.position, 0.5f);
+                Vector3 midpoint = Vector3.Lerp(nodes[edge.Subject].transform.position, nodes[edge.Object].transform.position, 0.5f);
 
                 // Assign the position of the text to the midpoint
-                //edgeObject.transform.position = midpoint;
+                edgeObject.transform.position = midpoint;
 
                 // Get the script of the edge object
                 Edge edgeScript = edgeObject.GetComponent<Edge>();
@@ -184,6 +184,10 @@ public class Visualization : MonoBehaviour {
                 // Make the edge less wide
                 lineRenderer.startWidth = 0.04f;
                 lineRenderer.endWidth = 0.04f;
+
+                // Sharpen the text by resizing it
+                text.fontSize = 150;
+                text.characterSize = .003f;
             }
         }
     }

@@ -94,6 +94,7 @@ public class Node : MonoBehaviour {
     public void SelectedColor() {
         foreach (GameObject edge in edges) {
             edge.GetComponent<LineRenderer>().material.color = transparentRed;
+            edge.GetComponent<TextMesh>().color = Color.red;
         }
 
         textMesh.color = Color.red;
@@ -102,6 +103,7 @@ public class Node : MonoBehaviour {
     public void UnselectedColor() {
         foreach (GameObject edge in edges) {
             edge.GetComponent<LineRenderer>().material.color = transparentWhite;
+            edge.GetComponent<TextMesh>().color = Color.white;
         }
 
         textMesh.color = Color.black;

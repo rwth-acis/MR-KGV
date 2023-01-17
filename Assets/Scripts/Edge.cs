@@ -24,10 +24,10 @@ public class Edge : MonoBehaviour {
         lineRenderer.SetPosition(1, objectNode.transform.position);
 
         // Calculate midpoint between the two nodes of the edge
-        //Vector3 midpoint = Vector3.Lerp(subjectNode.transform.position, objectNode.transform.position, 0.5f);
+        Vector3 midpoint = Vector3.Lerp(subjectNode.transform.position, objectNode.transform.position, 0.5f);
 
         // Update the position of the text to the midpoint
-        //this.transform.position = midpoint;
+        this.transform.position = midpoint;
 
         // Update the rotation of the text
         transform.rotation = Camera.main.transform.rotation;
