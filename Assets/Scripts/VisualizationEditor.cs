@@ -31,6 +31,8 @@ public class VisualizationEditor : MonoBehaviour {
     // This dictionary stores the corresponding game objects of the edges in the graph
     private Dictionary<Triple, GameObject> edges = new Dictionary<Triple, GameObject>();
 
+    Layout layout;
+
     void Start() {
         //TextAsset turtleFile = Resources.Load("example-modell") as TextAsset;
         //string turtleFileContents = turtleFile.text;
@@ -62,11 +64,16 @@ public class VisualizationEditor : MonoBehaviour {
 
         //UpdateNodePositions();
 
-
+        layout = GameObject.Find("LayoutHandler").GetComponent<Layout>();
+        layout.ForceDirectedLayout(nodes, edges, centerPoint, radius);
     }
 
     void Update() {
         
+    }
+
+    public void LayoutRedirect() {
+        layout.ForceDirectedLayout(nodes, edges, centerPoint, radius);
     }
 
     // This function takes the path to a Turtle file and parses the graph data into 'graph'
@@ -230,51 +237,6 @@ public class VisualizationEditor : MonoBehaviour {
     public void InitializeModelRepresentation() {
         // TODO
     }
-
-
-    void UpdateNodePositions() {
-        foreach (GameObject node1 in nodes.Values) {
-            Vector3 netForce = Vector3.zero;
-
-            Rigidbody rigidBody = node1.GetComponent<Rigidbody>();
-
-            foreach (GameObject node2 in nodes.Values) {
-                if (node1 != node2) {
-                    netForce += repulsiveForce(node1, node2);
-                }
-            }
-            netForce += attractiveForceCenter(node1);
-            netForce += dampingForce(node1);
-            rigidBody.velocity += netForce * Time.deltaTime;
-            node1.transform.position += rigidBody.velocity * Time.deltaTime;
-        }
-    }
-
-    Vector3 repulsiveForce(GameObject node1, GameObject node2) {
-        float distance = Vector3.Distance(node1.transform.position, node2.transform.position);
-        Vector3 direction = (node2.transform.position - node1.transform.position).normalized;
-        float forceMagnitude = (0.1f * 0.1f) / (distance * distance);
-        return direction * forceMagnitude;
-    }
-
-    // Attractive force of each node towards a shared center point
-    Vector3 attractiveForceCenter(GameObject node) {
-        Vector3 direction = (centerPoint.transform.position - node.transform.position).normalized;
-        float distance = Vector3.Distance(node.transform.position, centerPoint.transform.position);
-        float forceMagnitude = distance * distance;
-        return direction * forceMagnitude;
-    }
-
-    void attractiveForceEdge(GameObject edge) {
-
-    }
-
-    Vector3 dampingForce(GameObject node) {
-        Rigidbody rigidBody = node.GetComponent<Rigidbody>();
-
-        return -rigidBody.velocity * 30;
-    }
-
 
     public void ActivateSphereRepresentation() {
         foreach (GameObject node in nodes.Values) {

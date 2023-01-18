@@ -44,6 +44,8 @@ public class Visualization : MonoBehaviour {
 
     private bool graphSet;
 
+    Layout layout;
+
     // Start is called before the first frame update
     void Start() {
         string savingPath = Application.persistentDataPath + "/rdf";
@@ -53,6 +55,8 @@ public class Visualization : MonoBehaviour {
         string loadPath = savingPath + "/example-modell.ttl";
 
         ReadTurtleFile(loadPath);
+
+        layout = GameObject.Find("LayoutHandler").GetComponent<Layout>();
     }
 
     void Update() {
@@ -63,7 +67,7 @@ public class Visualization : MonoBehaviour {
                 Pose hitPose = hits[0].pose;
 
                 // Change center point position based on user input
-                centerPoint.transform.position = hitPose.position + new Vector3(0, 1.2f, 0);
+                centerPoint.transform.position = hitPose.position + new Vector3(0, 1.1f, 0);
 
                 //centerPoint = Instantiate(new GameObject(), hitPose.position + new Vector3(0, 1, 0), hitPose.rotation);
 
@@ -74,6 +78,8 @@ public class Visualization : MonoBehaviour {
 
                 graphSet = true;
                 DeactivatePlaneManager();
+
+                layout.ForceDirectedLayout(nodes, edges, centerPoint, radius);
             }
         }
     }
@@ -84,6 +90,10 @@ public class Visualization : MonoBehaviour {
         foreach (ARPlane plane in arPlaneManager.trackables) {
             plane.gameObject.SetActive(false);
         }
+    }
+
+    public void LayoutRedirect() {
+        layout.ForceDirectedLayout(nodes, edges, centerPoint, radius);
     }
 
     /// <summary>
@@ -237,44 +247,6 @@ public class Visualization : MonoBehaviour {
             // Activate image representation
             node.transform.Find("ImageRepresentation(Clone)").gameObject.SetActive(true);
         }
-    }
-
-    void UpdateNodePositions() {
-        foreach (GameObject node1 in nodes.Values) {
-            Vector3 netForce = Vector3.zero;
-
-            Rigidbody rigidBody = node1.GetComponent<Rigidbody>();
-
-            foreach (GameObject node2 in nodes.Values) {
-                if (node1 != node2) {
-                    netForce += repulsiveForce(node1, node2);
-                }
-            }
-            netForce += attractiveForce(node1);
-            //netForce += dampingForce(node1);
-            rigidBody.velocity += netForce * Time.deltaTime;
-            node1.transform.position += rigidBody.velocity * Time.deltaTime;
-        }
-    }
-
-    Vector3 repulsiveForce(GameObject node1, GameObject node2) {
-        float distance = Vector3.Distance(node1.transform.position, node2.transform.position);
-        Vector3 direction = (node2.transform.position - node1.transform.position).normalized;
-        float forceMagnitude = (2f * 2f) / (distance * distance);
-        return direction * forceMagnitude;
-    }
-
-    Vector3 attractiveForce(GameObject node) {
-        Vector3 direction = (centerPoint.transform.position - node.transform.position).normalized;
-        float distance = Vector3.Distance(node.transform.position, centerPoint.transform.position);
-        float forceMagnitude = distance * distance;
-        return direction * forceMagnitude;
-    }
-
-    Vector3 dampingForce(GameObject node) {
-        Rigidbody rigidBody = node.GetComponent<Rigidbody>();
-
-        return -rigidBody.velocity * 30;
     }
 
     /// <summary>
