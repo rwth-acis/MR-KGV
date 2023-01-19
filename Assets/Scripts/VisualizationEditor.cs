@@ -41,16 +41,12 @@ public class VisualizationEditor : MonoBehaviour {
 
         Directory.CreateDirectory(savingPath);
 
-        string loadPath = savingPath + "/example-modell.ttl";
+        //string loadPath = savingPath + "/example-modell.ttl";
+        string loadPath = savingPath + "/Neuroscience-modell.ttl";
 
         ReadTurtleFile(loadPath);
 
         Debug.Log(loadPath);
-
-        //ReadTurtleFile(turtleFileContents);
-
-        //ReadTurtleFile("Assets/Resources/example-modell.ttl");
-        //ReadTurtleFile("Assets/Files/example-modell_complex_weights.ttl");
 
         InitializeGraph();
 
@@ -59,10 +55,6 @@ public class VisualizationEditor : MonoBehaviour {
 
         // Second child
         InitializeImageRepresentation();
-
-        //ActivateImageRepresentation();
-
-        //UpdateNodePositions();
 
         layout = GameObject.Find("LayoutHandler").GetComponent<Layout>();
         layout.ForceDirectedLayout(nodes, edges, centerPoint, radius);

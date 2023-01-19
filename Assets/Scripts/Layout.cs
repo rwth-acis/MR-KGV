@@ -11,10 +11,10 @@ public class Layout : MonoBehaviour {
     public float coolingFactor = 0.99f;
 
     // Threshold for the combined net force of all nodes
-    public float threshold = 100f;
+    public float threshold = 10f;
 
     // Maximum number of iterations for the algorithm
-    public int maxIterations = 1000;
+    public int maxIterations = 100;
 
     // Minimum distance between two nodes
     public float minDistance = 0.05f;

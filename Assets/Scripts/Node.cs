@@ -39,12 +39,12 @@ public class Node : MonoBehaviour {
         textMesh = this.GetComponent<TextMesh>();
 
         // Find canvas
-        Canvas arScreen = GameObject.Find("ARScreen").GetComponent<Canvas>();
+        Canvas mainScreen = GameObject.Find("MainScreen").GetComponent<Canvas>();
 
         // Find annotation screen, options screen, and menu button
-        annotationScreen = arScreen.transform.Find("AnnotationScreen").gameObject;
-        optionsScreen = arScreen.transform.Find("OptionsScreen").gameObject;
-        arButton = arScreen.transform.Find("OptionsButton").gameObject;
+        annotationScreen = mainScreen.transform.Find("AnnotationScreen").gameObject;
+        optionsScreen = mainScreen.transform.Find("OptionsScreen").gameObject;
+        arButton = mainScreen.transform.Find("OptionsButton").gameObject;
     }
 
     // Update is called once per frame
@@ -62,7 +62,7 @@ public class Node : MonoBehaviour {
 
             // If another node is still selected, unselect the other node
             if (annotationScreen.activeSelf) {
-                annotationScreen.GetComponent<AnnotationScreenButton>().selectedNode.UnselectedColor();
+                annotationScreen.GetComponent<AnnotationScreen>().selectedNode.UnselectedColor();
             }
 
             // Change color to indicate selected state
@@ -73,7 +73,7 @@ public class Node : MonoBehaviour {
 
             // Deactivate options button, activate annotation screen (if needed) and pass on this node
             annotationScreen.SetActive(true);
-            annotationScreen.GetComponent<AnnotationScreenButton>().selectedNode = this;
+            annotationScreen.GetComponent<AnnotationScreen>().selectedNode = this;
             arButton.SetActive(false);
         } else {
             tapped = true;
