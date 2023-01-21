@@ -5,26 +5,18 @@ using VDS.RDF;
 using VDS.RDF.Parsing;
 using System.IO;
 using System.Net;
-using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARSubsystems;
 
 public class Visualization : MonoBehaviour {
-
-    // Currently loaded graph
-    private IGraph graph;
-
     // Radius in which nodes get initialized around the center point
     public float radius;
 
     // Center point of the graph visualization; used in layout
     public GameObject centerPoint;
 
+    // Prefabs
     public GameObject edgePrefab;
-
     public GameObject nodePrefab;
-
     public GameObject sphereRepresentationPrefab;
-
     public GameObject imageRepresentationPrefab;
 
     // This dictionary stores the corresponding game objects of the nodes in the graph 
@@ -33,63 +25,44 @@ public class Visualization : MonoBehaviour {
     // This dictionary stores the corresponding game objects of the edges in the graph
     private Dictionary<Triple, GameObject> edges = new Dictionary<Triple, GameObject>();
 
-    // AR UI related
-    public ARRaycastManager raycastManager;
+    // Currently loaded graph
+    private IGraph graph = new Graph();
 
-    public ARPlaneManager arPlaneManager;
+    private GameObject graphGO;
 
-    public Camera arCamera;
+    private Layout layout;
 
-    private List<ARRaycastHit> hits = new List<ARRaycastHit>();
+    private Dictionary<string, string> imageURLs = new Dictionary<string, string>();
 
-    private bool graphSet;
+    string savingPath;
 
-    Layout layout;
-
-    // Start is called before the first frame update
     void Start() {
-        string savingPath = Application.persistentDataPath + "/rdf";
-
+        // Create folder for graphs to be loaded from
+        savingPath = Application.persistentDataPath + "/rdf";
         Directory.CreateDirectory(savingPath);
 
-        string loadPath = savingPath + "/example-modell.ttl";
-
-        ReadTurtleFile(loadPath);
-
+        graphGO = GameObject.Find("Graph");
         layout = GameObject.Find("LayoutHandler").GetComponent<Layout>();
+
+        InitializeImageURLs();
+
+        LoadGraph1FromFile();
+
+        //DEBUGGING
+        //InitializeGraph();
+        //InitializeSphereRepresentation();
+        //InitializeImageRepresentation();
+        //ActivateSphereRepresentation();
     }
 
-    void Update() {
-        Ray ray = arCamera.ScreenPointToRay(Input.mousePosition);
+    public void Initizalization() {
+        InitializeGraph();
+        InitializeSphereRepresentation();
+        InitializeImageRepresentation();
 
-        if (Input.GetMouseButton(0) && !graphSet) {
-            if (raycastManager.Raycast(ray, hits, TrackableType.Planes)) {
-                Pose hitPose = hits[0].pose;
+        ActivateSphereRepresentation();
 
-                // Change center point position based on user input
-                centerPoint.transform.position = hitPose.position + new Vector3(0, 1.1f, 0);
-
-                //centerPoint = Instantiate(new GameObject(), hitPose.position + new Vector3(0, 1, 0), hitPose.rotation);
-
-                // Initialize Graph + Representations
-                InitializeGraph();
-                InitializeSphereRepresentation();
-                InitializeImageRepresentation();
-
-                graphSet = true;
-                DeactivatePlaneManager();
-
-                layout.ForceDirectedLayout(nodes, edges, centerPoint, radius);
-            }
-        }
-    }
-
-    public void DeactivatePlaneManager() {
-        arPlaneManager.enabled = false;
-
-        foreach (ARPlane plane in arPlaneManager.trackables) {
-            plane.gameObject.SetActive(false);
-        }
+        LayoutRedirect();
     }
 
     public void LayoutRedirect() {
@@ -135,12 +108,15 @@ public class Visualization : MonoBehaviour {
                 // Get the script of the node object
                 Node nodeScript = nodeObject.GetComponent<Node>();
 
-                // Store the uri of the node
+                // Store the uri and label of the node
                 nodeScript.uri = uriNode.Uri.ToString();
+                nodeScript.label = SplitString(uriNode.Uri.ToString());
 
                 // Sharpen the text by resizing it
                 text.fontSize = 150;
                 text.characterSize = .02f;
+
+                nodeObject.transform.SetParent(graphGO.transform);
             }
         }
 
@@ -198,6 +174,8 @@ public class Visualization : MonoBehaviour {
                 // Sharpen the text by resizing it
                 text.fontSize = 150;
                 text.characterSize = .003f;
+
+                edgeObject.transform.SetParent(graphGO.transform);
             }
         }
     }
@@ -209,7 +187,7 @@ public class Visualization : MonoBehaviour {
 
             sphereRepresentation.transform.SetParent(node.transform);
 
-            sphereRepresentation.transform.position = node.transform.position; // transform main camera?
+            sphereRepresentation.transform.position = node.transform.position;
         }
     }
 
@@ -220,7 +198,7 @@ public class Visualization : MonoBehaviour {
 
             imageRepresentation.transform.SetParent(node.transform);
 
-            imageRepresentation.transform.position = node.transform.position; // transform main camera?
+            imageRepresentation.transform.position = node.transform.position;
         }
     }
 
@@ -249,6 +227,10 @@ public class Visualization : MonoBehaviour {
         }
     }
 
+    public void ActivateModelRepresentation() {
+        // TODO
+    }
+
     /// <summary>
     /// Given a path to a Turtle file, parse the graph data into the global IGraph 'graph'
     /// </summary>
@@ -257,8 +239,6 @@ public class Visualization : MonoBehaviour {
         try {
             // Create a new instance of the Turtle parser
             TurtleParser parser = new TurtleParser();
-
-            graph = new Graph();
 
             parser.Load(graph, filePath);
         }
@@ -274,21 +254,61 @@ public class Visualization : MonoBehaviour {
         }
     }
 
-    /// <summary>
-    /// Given a string (representing a URI), return the substring that comes after the last character '/'
-    /// </summary>
-    /// <param name="s"></param>
-    /// <returns></returns>
+    public void ClearGraph() {
+        // Destroy nodes and edges in scene
+        Transform graphGOTransform = graphGO.transform;
+
+        for(int i = graphGOTransform.childCount - 1; i >= 0; i--) {
+            Transform childTransform = graphGOTransform.GetChild(i);
+            Destroy(childTransform.gameObject);
+        }
+
+        // Clear dictionaries and graph
+        nodes.Clear();
+        edges.Clear();
+        graph.Clear();
+    }
+
+    public void LoadGraph1FromFile() {
+        ClearGraph();
+        
+        string loadPath = savingPath + "/example-modell.ttl";
+        ReadTurtleFile(loadPath);
+
+        GameObject.Find("PlacementHandler").GetComponent<Placement>().ReactivatePlacement();
+    }
+
+    public void LoadGraph2FromFile() {
+        ClearGraph();
+
+        string loadPath = savingPath + "/Neuroscience-modell.ttl";
+        ReadTurtleFile(loadPath);
+
+        GameObject.Find("PlacementHandler").GetComponent<Placement>().ReactivatePlacement();
+    }
+
+    public void FetchImageURLsFromDic() {
+        foreach (GameObject node in nodes.Values) {
+            Node nodeComponent = node.GetComponent<Node>();
+
+            //string imageURL = "";
+
+            imageURLs.TryGetValue(nodeComponent.label, out nodeComponent.imageURL);
+        }
+    }
+
+    public void InitializeImageURLs() {
+        imageURLs.Add("Problems", "https://i.guim.co.uk/img/media/9c4164a3454b77912be9ad36a90f79885075eb34/9_46_1423_854/master/1423.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=02d0e75f8c738d515cfa5ccf7f2ceebc");
+    }
+
+    // Return the substring that comes after the last character '/'
     public string SplitString(string s) {
         int lastIndex = s.LastIndexOf('/');
 
         return s.Substring(lastIndex + 1);
     }
 
-    /// <summary>
-    /// Given a graph, output the number of different types of nodes contained within the graph
-    /// </summary>
-    /// <param name="g"></param>
+    // Output the number of different types of nodes contained within a given graph
     void analyzeGraphNodes(IGraph g) {
         int numberOfBlankNodes = 0;
         int numberOfLiteralNodes = 0;

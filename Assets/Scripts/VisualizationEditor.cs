@@ -7,22 +7,16 @@ using System.IO;
 using System.Net;
 
 public class VisualizationEditor : MonoBehaviour {
-
-    // Currently loaded graph
-    private IGraph graph;
-
     // Radius in which nodes get initialized around the center point
     public float radius;
 
     // Center point of the graph visualization; used in layout
     public GameObject centerPoint;
 
+    // Prefabs
     public GameObject edgePrefab;
-
     public GameObject nodePrefab;
-
     public GameObject sphereRepresentationPrefab;
-
     public GameObject imageRepresentationPrefab;
 
     // This dictionary stores the corresponding game objects of the nodes in the graph 
@@ -30,6 +24,11 @@ public class VisualizationEditor : MonoBehaviour {
 
     // This dictionary stores the corresponding game objects of the edges in the graph
     private Dictionary<Triple, GameObject> edges = new Dictionary<Triple, GameObject>();
+
+    // Currently loaded graph
+    private IGraph graph;
+
+    private GameObject graphGO;
 
     Layout layout;
 
@@ -56,8 +55,11 @@ public class VisualizationEditor : MonoBehaviour {
         // Second child
         InitializeImageRepresentation();
 
+        graphGO = GameObject.Find("Graph");
         layout = GameObject.Find("LayoutHandler").GetComponent<Layout>();
         layout.ForceDirectedLayout(nodes, edges, centerPoint, radius);
+
+        //ActivateImageRepresentation();
     }
 
     void Update() {
@@ -140,6 +142,8 @@ public class VisualizationEditor : MonoBehaviour {
                 // Sharpen the text by resizing it
                 text.fontSize = 150;
                 text.characterSize = .02f;
+
+                nodeObject.transform.SetParent(graphGO.transform);
             }
         }
 
@@ -197,6 +201,8 @@ public class VisualizationEditor : MonoBehaviour {
                 // Sharpen the text by resizing it
                 text.fontSize = 150;
                 text.characterSize = .01f;
+
+                edgeObject.transform.SetParent(graphGO.transform);
             }
         }
     }

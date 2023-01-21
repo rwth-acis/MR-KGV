@@ -11,6 +11,8 @@ public class Node : MonoBehaviour {
 
     public string uri = "";
 
+    public string label = "";
+
     public string imageURL = "";
 
     //public string modelURL;
@@ -68,12 +70,9 @@ public class Node : MonoBehaviour {
             // Change color to indicate selected state
             SelectedColor();
 
-            // Pass necessary values BEFORE annotation screen is activated
-            //GameObject.Find("Label").GetComponent<TMPro.TextMeshProUGUI>().text = uri;
-
-            // Deactivate options button, activate annotation screen (if needed) and pass on this node
-            annotationScreen.SetActive(true);
+            // First reference the node, then activate annotation screen and deactivate options button
             annotationScreen.GetComponent<AnnotationScreen>().selectedNode = this;
+            annotationScreen.SetActive(true);
             arButton.SetActive(false);
         } else {
             tapped = true;

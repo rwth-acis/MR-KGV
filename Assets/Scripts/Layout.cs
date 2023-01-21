@@ -92,7 +92,7 @@ public class Layout : MonoBehaviour {
         return direction * distance;
     }
 
-    Vector3 AttractiveForceCenter(GameObject node, GameObject centerPoint) {
+    private Vector3 AttractiveForceCenter(GameObject node, GameObject centerPoint) {
         Vector3 direction = (centerPoint.transform.position - node.transform.position).normalized;
         float distance = Vector3.Distance(node.transform.position, centerPoint.transform.position);
         float forceMagnitude = distance * distance;

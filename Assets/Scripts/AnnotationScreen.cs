@@ -10,10 +10,14 @@ public class AnnotationScreen : MonoBehaviour {
     private GameObject optionsButton;
     private Button annotationBackButton;
 
-    // Variables to read/write information from UI AnnotationBackButton
+    // Variables to read/write information from UI
     private TMPro.TextMeshProUGUI tmpLabel;
     private TMPro.TextMeshProUGUI tmpImageURL;
     private TMPro.TextMeshProUGUI tmpAnnotation;
+
+    // Input fields
+    private TMPro.TMP_InputField tmpInputImageURL;
+    private TMPro.TMP_InputField tmpInputAnnotation;
 
     void Start() {
         // Find canvas
@@ -29,6 +33,10 @@ public class AnnotationScreen : MonoBehaviour {
         tmpImageURL = GameObject.Find("ImageURLText").GetComponent<TMPro.TextMeshProUGUI>();
         tmpAnnotation = GameObject.Find("AnnotationText").GetComponent<TMPro.TextMeshProUGUI>();
 
+        // Find relevant input fields
+        tmpInputImageURL = GameObject.Find("InputImageURL").GetComponent<TMPro.TMP_InputField>();
+        tmpInputAnnotation = GameObject.Find("InputAnnotation").GetComponent<TMPro.TMP_InputField>();
+
         // Add listener for when the back button is clicked
         annotationBackButton.onClick.AddListener(CloseAnnotationScreen);
     }
@@ -39,8 +47,8 @@ public class AnnotationScreen : MonoBehaviour {
     }
 
     void OnEnable() {
-        tmpImageURL.text = selectedNode.imageURL;
-        tmpAnnotation.text = selectedNode.annotation;
+        tmpInputImageURL.text = selectedNode.imageURL;
+        tmpInputAnnotation.text = selectedNode.annotation;
     }
 
     // Annotation back button logic
@@ -51,7 +59,7 @@ public class AnnotationScreen : MonoBehaviour {
         selectedNode.UnselectedColor();
 
         // Write back annotation (could be changed by user)
-        selectedNode.imageURL = tmpImageURL.text;
-        selectedNode.annotation = tmpAnnotation.text;
+        selectedNode.imageURL = tmpInputImageURL.text;
+        selectedNode.annotation = tmpInputAnnotation.text;
     }
 }
