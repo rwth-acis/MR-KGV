@@ -26,9 +26,11 @@ public class VisualizationEditor : MonoBehaviour {
     private Dictionary<Triple, GameObject> edges = new Dictionary<Triple, GameObject>();
 
     // Currently loaded graph
-    private IGraph graph;
+    private IGraph graph = new Graph();
 
     private GameObject graphGO;
+
+    private Dictionary<string, string> imageURLs = new Dictionary<string, string>();
 
     Layout layout;
 
@@ -47,6 +49,8 @@ public class VisualizationEditor : MonoBehaviour {
 
         Debug.Log(loadPath);
 
+        graphGO = GameObject.Find("Graph");
+
         InitializeGraph();
 
         // First child
@@ -55,15 +59,33 @@ public class VisualizationEditor : MonoBehaviour {
         // Second child
         InitializeImageRepresentation();
 
-        graphGO = GameObject.Find("Graph");
         layout = GameObject.Find("LayoutHandler").GetComponent<Layout>();
         layout.ForceDirectedLayout(nodes, edges, centerPoint, radius);
+
+        InitializeImageURLs();
+
+        FetchImageURLsFromDic();
 
         //ActivateImageRepresentation();
     }
 
     void Update() {
         
+    }
+
+    public void InitializeImageURLs() {
+        imageURLs.Add("Progress", "https://i.guim.co.uk/img/media/9c4164a3454b77912be9ad36a90f79885075eb34/9_46_1423_854/master/1423.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=02d0e75f8c738d515cfa5ccf7f2ceebc");
+        imageURLs.Add("Signals", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Polynomialdeg2.svg/1200px-Polynomialdeg2.svg.png");
+    }
+
+    public void FetchImageURLsFromDic() {
+        foreach (GameObject node in nodes.Values) {
+            Node nodeComponent = node.GetComponent<Node>();
+
+            //nodeComponent.annotation = "test";
+
+            imageURLs.TryGetValue(nodeComponent.label, out nodeComponent.imageURL);
+        }
     }
 
     public void LayoutRedirect() {
@@ -75,8 +97,6 @@ public class VisualizationEditor : MonoBehaviour {
         try {
             // Create a new instance of the Turtle parser
             TurtleParser parser = new TurtleParser();
-
-            graph = new Graph();
 
             parser.Load(graph, filePath);
         }
@@ -136,14 +156,17 @@ public class VisualizationEditor : MonoBehaviour {
                 // Get the script of the node object
                 Node nodeScript = nodeObject.GetComponent<Node>();
 
-                // Store the uri of the node
+                // Store the uri and label of the node
                 nodeScript.uri = uriNode.Uri.ToString();
+                nodeScript.label = SplitString(uriNode.Uri.ToString());
 
                 // Sharpen the text by resizing it
                 text.fontSize = 150;
                 text.characterSize = .02f;
 
                 nodeObject.transform.SetParent(graphGO.transform);
+
+                nodeObject.layer = LayerMask.NameToLayer("GraphElements");
             }
         }
 
@@ -203,6 +226,8 @@ public class VisualizationEditor : MonoBehaviour {
                 text.characterSize = .01f;
 
                 edgeObject.transform.SetParent(graphGO.transform);
+
+                edgeObject.layer = LayerMask.NameToLayer("GraphElements");
             }
         }
     }
@@ -214,7 +239,9 @@ public class VisualizationEditor : MonoBehaviour {
 
             sphereRepresentation.transform.SetParent(node.transform);
 
-            sphereRepresentation.transform.position = node.transform.position; // transform main camera?
+            sphereRepresentation.transform.position = node.transform.position;
+
+            sphereRepresentation.layer = LayerMask.NameToLayer("GraphElements");
         }
     }
 
@@ -225,7 +252,9 @@ public class VisualizationEditor : MonoBehaviour {
 
             imageRepresentation.transform.SetParent(node.transform);
 
-            imageRepresentation.transform.position = node.transform.position; // transform main camera?
+            imageRepresentation.transform.position = node.transform.position;
+
+            imageRepresentation.layer = LayerMask.NameToLayer("GraphElements");
 
             // Sphere representation is the first representation to show after initialization
             imageRepresentation.SetActive(false);
@@ -254,6 +283,10 @@ public class VisualizationEditor : MonoBehaviour {
 
             // Activate image representation
             node.transform.Find("ImageRepresentation(Clone)").gameObject.SetActive(true);
+
+            //MeshRenderer renderer = node.transform.Find("SphereRepresentation(Clone)").gameObject.GetComponent<MeshRenderer>();
+
+            //renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0);
         }
     }
 

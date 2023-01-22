@@ -15,8 +15,9 @@ public class ImageRepresentation : MonoBehaviour {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
         // Resize image
-        gameObject.transform.localScale = new Vector3(1, 1, 1);
-        gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 100);
+        gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+
+        gameObject.transform.localPosition = new Vector3(0, 0, 0.01f);
 
         //Load image from Resources folder
         //spriteRenderer.sprite = Resources.Load<Sprite>("Images/HelloWorld");

@@ -23,9 +23,9 @@ public class OptionsScreen : MonoBehaviour {
         changeRepresentationDropdown = GameObject.Find("Dropdown").GetComponent<TMPro.TMP_Dropdown>();
         loadGraph1Button = GameObject.Find("LoadGraph1Button").GetComponent<Button>();
         loadGraph2Button = GameObject.Find("LoadGraph2Button").GetComponent<Button>();
-        fetchImagesButton = GameObject.Find("FetchImages").GetComponent<Button>();
+        fetchImagesButton = GameObject.Find("FetchImagesButton").GetComponent<Button>();
 
-        // Add listener for options back button
+        // Add listener for buttons
         optionsBackButton.onClick.AddListener(CloseOptionsScreen);
         changeRepresentationDropdown.onValueChanged.AddListener(ChangeRepresentation);
         loadGraph1Button.onClick.AddListener(LoadGraph1);
@@ -58,14 +58,17 @@ public class OptionsScreen : MonoBehaviour {
         }
     }
 
+    // Load graph 1 button logic
     public void LoadGraph1() {
         GameObject.Find("VisualizationHandler").GetComponent<Visualization>().LoadGraph1FromFile();
     }
 
+    // Load graph 2 button logic
     public void LoadGraph2() {
         GameObject.Find("VisualizationHandler").GetComponent<Visualization>().LoadGraph2FromFile();
     }
 
+    // Fetch images button logic
     public void FetchImages() {
         GameObject.Find("VisualizationHandler").GetComponent<Visualization>().FetchImageURLsFromDic();
     }

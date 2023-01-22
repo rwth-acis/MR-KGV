@@ -64,7 +64,7 @@ public class Node : MonoBehaviour {
 
             // If another node is still selected, unselect the other node
             if (annotationScreen.activeSelf) {
-                annotationScreen.GetComponent<AnnotationScreen>().selectedNode.UnselectedColor();
+                annotationScreen.GetComponent<AnnotationScreen>().CloseAnnotationScreen();
             }
 
             // Change color to indicate selected state

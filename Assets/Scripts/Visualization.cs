@@ -117,6 +117,8 @@ public class Visualization : MonoBehaviour {
                 text.characterSize = .02f;
 
                 nodeObject.transform.SetParent(graphGO.transform);
+
+                nodeObject.layer = LayerMask.NameToLayer("GraphElements");
             }
         }
 
@@ -176,6 +178,8 @@ public class Visualization : MonoBehaviour {
                 text.characterSize = .003f;
 
                 edgeObject.transform.SetParent(graphGO.transform);
+
+                edgeObject.layer = LayerMask.NameToLayer("GraphElements");
             }
         }
     }
@@ -188,6 +192,8 @@ public class Visualization : MonoBehaviour {
             sphereRepresentation.transform.SetParent(node.transform);
 
             sphereRepresentation.transform.position = node.transform.position;
+
+            sphereRepresentation.layer = LayerMask.NameToLayer("GraphElements");
         }
     }
 
@@ -199,6 +205,8 @@ public class Visualization : MonoBehaviour {
             imageRepresentation.transform.SetParent(node.transform);
 
             imageRepresentation.transform.position = node.transform.position;
+
+            imageRepresentation.layer = LayerMask.NameToLayer("GraphElements");
         }
     }
 
@@ -291,7 +299,7 @@ public class Visualization : MonoBehaviour {
         foreach (GameObject node in nodes.Values) {
             Node nodeComponent = node.GetComponent<Node>();
 
-            //string imageURL = "";
+            //nodeComponent.annotation = "test";
 
             imageURLs.TryGetValue(nodeComponent.label, out nodeComponent.imageURL);
         }
