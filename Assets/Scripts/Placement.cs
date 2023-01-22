@@ -16,8 +16,10 @@ public class Placement : MonoBehaviour {
 
     private bool graphSet = false;
 
-    void Start() {
+    private GameObject placementPrompt;
 
+    void Start() {
+        placementPrompt = GameObject.Find("PlacementPrompt");
     }
 
     void Update() {
@@ -48,6 +50,7 @@ public class Placement : MonoBehaviour {
 
     private void DeactivatePlaneManager() {
         arPlaneManager.enabled = false;
+        placementPrompt.SetActive(false);
 
         foreach (ARPlane plane in arPlaneManager.trackables) {
             plane.gameObject.SetActive(false);
@@ -56,6 +59,7 @@ public class Placement : MonoBehaviour {
 
     private void ActivatePlaneManager() {
         arPlaneManager.enabled = true;
+        placementPrompt.SetActive(true);
 
         foreach (ARPlane plane in arPlaneManager.trackables) {
             plane.gameObject.SetActive(true);
