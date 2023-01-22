@@ -60,6 +60,8 @@ public class Visualization : MonoBehaviour {
         InitializeSphereRepresentation();
         InitializeImageRepresentation();
 
+        FetchImageURLsFromDic();
+
         ActivateSphereRepresentation();
 
         LayoutRedirect();
