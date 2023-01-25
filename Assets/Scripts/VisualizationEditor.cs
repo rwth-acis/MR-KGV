@@ -44,6 +44,9 @@ public class VisualizationEditor : MonoBehaviour {
 
         //string loadPath = savingPath + "/example-modell.ttl";
         string loadPath = savingPath + "/Neuroscience-modell.ttl";
+        //string loadPath = savingPath + "/Beispiel.ttl";
+        //string loadPath = savingPath + "/Climatechange-modell.ttl";
+        //string loadPath = savingPath + "/Climatechange-lake-modell.ttl";
 
         ReadTurtleFile(loadPath);
 
@@ -76,6 +79,9 @@ public class VisualizationEditor : MonoBehaviour {
     public void InitializeImageURLs() {
         imageURLs.Add("Progress", "https://i.guim.co.uk/img/media/9c4164a3454b77912be9ad36a90f79885075eb34/9_46_1423_854/master/1423.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=02d0e75f8c738d515cfa5ccf7f2ceebc");
         imageURLs.Add("Signals", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Polynomialdeg2.svg/1200px-Polynomialdeg2.svg.png");
+        imageURLs.Add("Rome", "https://upload.wikimedia.org/wikipedia/commons/c/c0/Rome_Montage_2017.png");
+        imageURLs.Add("Pope", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Pope_Francis_Korea_Haemi_Castle_19.jpg/1200px-Pope_Francis_Korea_Haemi_Castle_19.jpg");
+        imageURLs.Add("Christianity", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Christian_cross.svg/1200px-Christian_cross.svg.png");
     }
 
     public void FetchImageURLsFromDic() {
@@ -130,6 +136,11 @@ public class VisualizationEditor : MonoBehaviour {
 
                 // If term node, do not create
                 if (uriNode.Uri.ToString() == "http://halle/ontology/Term") {
+                    break;
+                }
+
+                // If node node, do not create
+                if (uriNode.Uri.ToString() == "http://example.com/Node") {
                     break;
                 }
 

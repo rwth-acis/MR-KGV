@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1c98bebc2d0604c89cf0782bf13289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  k: 0.5
+  k: 1.5
   coolingFactor: 0.99
   threshold: 10
   maxIterations: 100

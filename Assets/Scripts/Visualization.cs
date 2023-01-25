@@ -87,6 +87,11 @@ public class Visualization : MonoBehaviour {
                     break;
                 }
 
+                // If node node, do not create
+                if (uriNode.Uri.ToString() == "http://example.com/Node") {
+                    break;
+                }
+
                 // Generate random coordinates within the specified radius around the center point
                 float x = Random.Range(-radius + centerPoint.transform.position.x, radius + centerPoint.transform.position.x);
                 float y = Random.Range(-radius + centerPoint.transform.position.y, radius + centerPoint.transform.position.y);
@@ -281,8 +286,8 @@ public class Visualization : MonoBehaviour {
 
     public void LoadGraph1FromFile() {
         ClearGraph();
-        
-        string loadPath = savingPath + "/example-modell.ttl";
+
+        string loadPath = savingPath + "/Climatechange-modell.ttl";
         ReadTurtleFile(loadPath);
 
         GameObject.Find("PlacementHandler").GetComponent<Placement>().ReactivatePlacement();
@@ -309,6 +314,28 @@ public class Visualization : MonoBehaviour {
 
     public void InitializeImageURLs() {
         imageURLs.Add("Problems", "https://i.guim.co.uk/img/media/9c4164a3454b77912be9ad36a90f79885075eb34/9_46_1423_854/master/1423.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=02d0e75f8c738d515cfa5ccf7f2ceebc");
+        imageURLs.Add("Cell", "https://www.genomicseducation.hee.nhs.uk/wp-content/uploads/2016/10/Cells-182516812_900px-858x286.jpg");
+        imageURLs.Add("Types", "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/3201bd70166659.5b9a640c875c3.png");
+        imageURLs.Add("Many", "https://i.ytimg.com/vi/AXnTwFjrnMY/maxresdefault.jpg");
+        imageURLs.Add("Body", "https://homehealth-uk.com/wp/wp-content/uploads/the-human-body-diagram.jpg");
+        imageURLs.Add("Signals", "https://maslosoft.com/signals/signals-1024.png");
+        imageURLs.Add("Other", "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Symbol_Resin_Code_7_OTHER.svg/1000px-Symbol_Resin_Code_7_OTHER.svg.png");
+        imageURLs.Add("Electrical", "https://www.thoughtco.com/thmb/oVbenYpwnRpN7IBWOFAjkrbEE6Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/electricity-cable-with-sparks-artwork-525442015-5804fee23df78cbc28a71d9f.jpg");
+        imageURLs.Add("Neuron", "https://upload.wikimedia.org/wikipedia/commons/1/10/Blausen_0657_MultipolarNeuron.png");
+        imageURLs.Add("Have", "https://media.pronunciationstudio.com/2013/08/Blog-have.png");
+        imageURLs.Add("Microscopy", "https://www.zeiss.de/content/dam/metrology/products/systems/microscopy/zeiss-industrial-microscopy-in-action.png");
+        imageURLs.Add("Progress", "https://thumbs.dreamstime.com/b/progress-report-icon-vector-isolated-white-background-progre-transparent-sign-black-symbols-133752892.jpg");
+        imageURLs.Add("Brain", "https://www.brainline.org/sites/all/modules/custom/bl_brain/images/brain-lateral.png");
+        imageURLs.Add("Functions", "https://www.mometrix.com/academy/wp-content/uploads/2021/01/graphs-3-1024x508.png");
+        imageURLs.Add("Cord", "https://www.polsterer-shop.de/wp-content/uploads/2020/06/cordstoff-1024x585.jpg");
+        imageURLs.Add("Spinal", "https://nci-media.cancer.gov/pdq/media/images/797134-571.jpg");
+        imageURLs.Add("System", "https://img.freepik.com/vektoren-kostenlos/solarsystem-fuer-den-naturwissenschaftlichen-unterricht_1308-89626.jpg?w=2000");
+        imageURLs.Add("Study", "https://www.brainscape.com/academy/content/images/2022/02/Ultimate-study-guide-header.png");
+        imageURLs.Add("Scientific", "https://s7g10.scene7.com/is/image/biomerieux/MicrosoftTeams-image-2?qlt=85&wid=1200&ts=1646065963617&dpr=off");
+
+        imageURLs.Add("Rome", "https://upload.wikimedia.org/wikipedia/commons/c/c0/Rome_Montage_2017.png");
+        imageURLs.Add("Pope", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Pope_Francis_Korea_Haemi_Castle_19.jpg/1200px-Pope_Francis_Korea_Haemi_Castle_19.jpg");
+        imageURLs.Add("Christianity", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Christian_cross.svg/1200px-Christian_cross.svg.png");
     }
 
     // Return the substring that comes after the last character '/'
