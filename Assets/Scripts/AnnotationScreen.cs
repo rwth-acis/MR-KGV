@@ -13,10 +13,12 @@ public class AnnotationScreen : MonoBehaviour {
     // Variables to read/write information from UI
     private TMPro.TextMeshProUGUI tmpLabel;
     private TMPro.TextMeshProUGUI tmpImageURL;
+    private TMPro.TextMeshProUGUI tmpModelURL;
     private TMPro.TextMeshProUGUI tmpAnnotation;
 
     // Input fields
     private TMPro.TMP_InputField tmpInputImageURL;
+    private TMPro.TMP_InputField tmpInputModelURL;
     private TMPro.TMP_InputField tmpInputAnnotation;
 
     void Start() {
@@ -31,10 +33,12 @@ public class AnnotationScreen : MonoBehaviour {
         // Find relevant text fields for node-specific texts
         tmpLabel = GameObject.Find("Label").GetComponent<TMPro.TextMeshProUGUI>();
         tmpImageURL = GameObject.Find("ImageURLText").GetComponent<TMPro.TextMeshProUGUI>();
+        tmpModelURL = GameObject.Find("ModelURLText").GetComponent<TMPro.TextMeshProUGUI>();
         tmpAnnotation = GameObject.Find("AnnotationText").GetComponent<TMPro.TextMeshProUGUI>();
 
         // Find relevant input fields
         tmpInputImageURL = GameObject.Find("InputImageURL").GetComponent<TMPro.TMP_InputField>();
+        tmpInputModelURL = GameObject.Find("InputModelURL").GetComponent<TMPro.TMP_InputField>();
         tmpInputAnnotation = GameObject.Find("InputAnnotation").GetComponent<TMPro.TMP_InputField>();
 
         // Add listener for when the back button is clicked
@@ -48,6 +52,7 @@ public class AnnotationScreen : MonoBehaviour {
 
     void OnEnable() {
         tmpInputImageURL.text = selectedNode.imageURL;
+        tmpInputModelURL.text = selectedNode.modelURL;
         tmpInputAnnotation.text = selectedNode.annotation;
     }
 
@@ -60,6 +65,7 @@ public class AnnotationScreen : MonoBehaviour {
 
         // Write back annotation (could be changed by user)
         selectedNode.imageURL = tmpInputImageURL.text;
+        selectedNode.modelURL = tmpInputModelURL.text;
         selectedNode.annotation = tmpInputAnnotation.text;
     }
 }

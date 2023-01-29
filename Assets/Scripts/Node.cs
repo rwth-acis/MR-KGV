@@ -6,16 +6,12 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
 public class Node : MonoBehaviour {
-
+    // Node data
     public string annotation = "";
-
     public string uri = "";
-
     public string label = "";
-
     public string imageURL = "";
-
-    //public string modelURL;
+    public string modelURL = "";
 
     private TextMesh textMesh;
 
@@ -32,10 +28,10 @@ public class Node : MonoBehaviour {
     // List of outgoing edges
     public List<GameObject> edges = new List<GameObject>();
 
+    // Color for outgoing edges
     private Color transparentRed = new Color(1, 0, 0, 0.5f);
     private Color transparentWhite = new Color(1, 1, 1, 0.5f);
 
-    // Start is called before the first frame update
     void Start() {
         // Find text mesh
         textMesh = this.GetComponent<TextMesh>();
@@ -49,7 +45,6 @@ public class Node : MonoBehaviour {
         arButton = mainScreen.transform.Find("OptionsButton").gameObject;
     }
 
-    // Update is called once per frame
     void Update() {
         // Update the rotation of the text
         transform.rotation = Camera.main.transform.rotation;

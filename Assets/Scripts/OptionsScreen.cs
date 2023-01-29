@@ -49,6 +49,11 @@ public class OptionsScreen : MonoBehaviour {
                 //Debug.Log("Changed to Image Representation.");
                 GameObject.Find("VisualizationHandler").GetComponent<Visualization>().ActivateImageRepresentation();
                 break;
+            // Models
+            case 2:
+                //Debug.Log("Changed to Image Representation.");
+                GameObject.Find("VisualizationHandler").GetComponent<Visualization>().ActivateModelRepresentation();
+                break;
             // Invalid
             default:
                 break;

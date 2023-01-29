@@ -18,6 +18,7 @@ public class Visualization : MonoBehaviour {
     public GameObject nodePrefab;
     public GameObject sphereRepresentationPrefab;
     public GameObject imageRepresentationPrefab;
+    public GameObject modelRepresentationPrefab;
 
     // This dictionary stores the corresponding game objects of the nodes in the graph 
     private Dictionary<INode, GameObject> nodes = new Dictionary<INode, GameObject>();
@@ -56,9 +57,11 @@ public class Visualization : MonoBehaviour {
     }
 
     public void Initizalization() {
+        graphGO.SetActive(true);
         InitializeGraph();
         InitializeSphereRepresentation();
         InitializeImageRepresentation();
+        InitializeModelRepresentation();
 
         FetchImageURLsFromDic();
 
@@ -218,7 +221,16 @@ public class Visualization : MonoBehaviour {
     }
 
     public void InitializeModelRepresentation() {
-        // TODO
+        
+        foreach (GameObject node in nodes.Values) {
+            GameObject modelRepresentation = Instantiate(modelRepresentationPrefab);
+
+            modelRepresentation.transform.SetParent(node.transform);
+
+            modelRepresentation.transform.position = node.transform.position;
+
+            modelRepresentation.layer = LayerMask.NameToLayer("GraphElements");
+        }
     }
 
     public void ActivateSphereRepresentation() {
@@ -243,7 +255,16 @@ public class Visualization : MonoBehaviour {
     }
 
     public void ActivateModelRepresentation() {
-        // TODO
+        foreach (GameObject node in nodes.Values) {
+            // Deactivate sphere representation
+            node.transform.Find("SphereRepresentation(Clone)").gameObject.SetActive(false);
+
+            // Deactivate image representation
+            node.transform.Find("ImageRepresentation(Clone)").gameObject.SetActive(false);
+
+            // Activate model representation
+            node.transform.Find("ModelRepresentation(Clone)").gameObject.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -286,8 +307,9 @@ public class Visualization : MonoBehaviour {
 
     public void LoadGraph1FromFile() {
         ClearGraph();
+        graphGO.SetActive(false);
 
-        string loadPath = savingPath + "/Climatechange-modell.ttl";
+        string loadPath = savingPath + "/graph1.ttl";
         ReadTurtleFile(loadPath);
 
         GameObject.Find("PlacementHandler").GetComponent<Placement>().ReactivatePlacement();
@@ -295,8 +317,9 @@ public class Visualization : MonoBehaviour {
 
     public void LoadGraph2FromFile() {
         ClearGraph();
+        graphGO.SetActive(false);
 
-        string loadPath = savingPath + "/Neuroscience-modell.ttl";
+        string loadPath = savingPath + "/graph2.ttl";
         ReadTurtleFile(loadPath);
 
         GameObject.Find("PlacementHandler").GetComponent<Placement>().ReactivatePlacement();
@@ -332,6 +355,18 @@ public class Visualization : MonoBehaviour {
         imageURLs.Add("System", "https://img.freepik.com/vektoren-kostenlos/solarsystem-fuer-den-naturwissenschaftlichen-unterricht_1308-89626.jpg?w=2000");
         imageURLs.Add("Study", "https://www.brainscape.com/academy/content/images/2022/02/Ultimate-study-guide-header.png");
         imageURLs.Add("Scientific", "https://s7g10.scene7.com/is/image/biomerieux/MicrosoftTeams-image-2?qlt=85&wid=1200&ts=1646065963617&dpr=off");
+
+        imageURLs.Add("Zelle", "https://www.genomicseducation.hee.nhs.uk/wp-content/uploads/2016/10/Cells-182516812_900px-858x286.jpg");
+        imageURLs.Add("Typen", "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/3201bd70166659.5b9a640c875c3.png");
+        imageURLs.Add("Viele", "https://i.ytimg.com/vi/AXnTwFjrnMY/maxresdefault.jpg");
+        imageURLs.Add("Körper", "https://homehealth-uk.com/wp/wp-content/uploads/the-human-body-diagram.jpg");
+        imageURLs.Add("Signale", "https://maslosoft.com/signals/signals-1024.png");
+        imageURLs.Add("Elektrische", "https://www.thoughtco.com/thmb/oVbenYpwnRpN7IBWOFAjkrbEE6Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/electricity-cable-with-sparks-artwork-525442015-5804fee23df78cbc28a71d9f.jpg");
+        imageURLs.Add("Haben", "https://media.pronunciationstudio.com/2013/08/Blog-have.png");
+        imageURLs.Add("Gehirn", "https://www.brainline.org/sites/all/modules/custom/bl_brain/images/brain-lateral.png");
+        imageURLs.Add("Funktionen", "https://www.mometrix.com/academy/wp-content/uploads/2021/01/graphs-3-1024x508.png");
+        imageURLs.Add("Studie", "https://www.brainscape.com/academy/content/images/2022/02/Ultimate-study-guide-header.png");
+        imageURLs.Add("Wissenschaftlich", "https://s7g10.scene7.com/is/image/biomerieux/MicrosoftTeams-image-2?qlt=85&wid=1200&ts=1646065963617&dpr=off");
 
         imageURLs.Add("Rome", "https://upload.wikimedia.org/wikipedia/commons/c/c0/Rome_Montage_2017.png");
         imageURLs.Add("Pope", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Pope_Francis_Korea_Haemi_Castle_19.jpg/1200px-Pope_Francis_Korea_Haemi_Castle_19.jpg");

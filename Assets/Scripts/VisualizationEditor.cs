@@ -43,10 +43,11 @@ public class VisualizationEditor : MonoBehaviour {
         Directory.CreateDirectory(savingPath);
 
         //string loadPath = savingPath + "/example-modell.ttl";
-        string loadPath = savingPath + "/Neuroscience-modell.ttl";
+        //string loadPath = savingPath + "/Neuroscience-modell.ttl";
         //string loadPath = savingPath + "/Beispiel.ttl";
         //string loadPath = savingPath + "/Climatechange-modell.ttl";
         //string loadPath = savingPath + "/Climatechange-lake-modell.ttl";
+        string loadPath = savingPath + "/graph2.ttl";
 
         ReadTurtleFile(loadPath);
 
@@ -82,6 +83,23 @@ public class VisualizationEditor : MonoBehaviour {
         imageURLs.Add("Rome", "https://upload.wikimedia.org/wikipedia/commons/c/c0/Rome_Montage_2017.png");
         imageURLs.Add("Pope", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Pope_Francis_Korea_Haemi_Castle_19.jpg/1200px-Pope_Francis_Korea_Haemi_Castle_19.jpg");
         imageURLs.Add("Christianity", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Christian_cross.svg/1200px-Christian_cross.svg.png");
+
+        imageURLs.Add("Zelle", "https://www.genomicseducation.hee.nhs.uk/wp-content/uploads/2016/10/Cells-182516812_900px-858x286.jpg");
+        imageURLs.Add("Typen", "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/3201bd70166659.5b9a640c875c3.png");
+        imageURLs.Add("Viele", "https://i.ytimg.com/vi/AXnTwFjrnMY/maxresdefault.jpg");
+        imageURLs.Add("Körper", "https://homehealth-uk.com/wp/wp-content/uploads/the-human-body-diagram.jpg");
+        imageURLs.Add("Signale", "https://maslosoft.com/signals/signals-1024.png");
+        imageURLs.Add("Elektrische", "https://www.thoughtco.com/thmb/oVbenYpwnRpN7IBWOFAjkrbEE6Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/electricity-cable-with-sparks-artwork-525442015-5804fee23df78cbc28a71d9f.jpg");
+        imageURLs.Add("Neuron", "https://upload.wikimedia.org/wikipedia/commons/1/10/Blausen_0657_MultipolarNeuron.png");
+        imageURLs.Add("Haben", "https://media.pronunciationstudio.com/2013/08/Blog-have.png");
+        imageURLs.Add("Progress", "https://thumbs.dreamstime.com/b/progress-report-icon-vector-isolated-white-background-progre-transparent-sign-black-symbols-133752892.jpg");
+        imageURLs.Add("Gehirn", "https://www.brainline.org/sites/all/modules/custom/bl_brain/images/brain-lateral.png");
+        imageURLs.Add("Funktionen", "https://www.mometrix.com/academy/wp-content/uploads/2021/01/graphs-3-1024x508.png");
+        imageURLs.Add("Cord", "https://www.polsterer-shop.de/wp-content/uploads/2020/06/cordstoff-1024x585.jpg");
+        imageURLs.Add("Spinal", "https://nci-media.cancer.gov/pdq/media/images/797134-571.jpg");
+        imageURLs.Add("System", "https://img.freepik.com/vektoren-kostenlos/solarsystem-fuer-den-naturwissenschaftlichen-unterricht_1308-89626.jpg?w=2000");
+        imageURLs.Add("Studie", "https://www.brainscape.com/academy/content/images/2022/02/Ultimate-study-guide-header.png");
+        imageURLs.Add("Wissenschaftlich", "https://s7g10.scene7.com/is/image/biomerieux/MicrosoftTeams-image-2?qlt=85&wid=1200&ts=1646065963617&dpr=off");
     }
 
     public void FetchImageURLsFromDic() {
