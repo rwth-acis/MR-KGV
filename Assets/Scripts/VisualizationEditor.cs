@@ -18,6 +18,7 @@ public class VisualizationEditor : MonoBehaviour {
     public GameObject nodePrefab;
     public GameObject sphereRepresentationPrefab;
     public GameObject imageRepresentationPrefab;
+    public GameObject modelRepresentationPrefab;
 
     // This dictionary stores the corresponding game objects of the nodes in the graph 
     private Dictionary<INode, GameObject> nodes = new Dictionary<INode, GameObject>();
@@ -31,6 +32,8 @@ public class VisualizationEditor : MonoBehaviour {
     private GameObject graphGO;
 
     private Dictionary<string, string> imageURLs = new Dictionary<string, string>();
+
+    private Dictionary<string, string> modelURLs = new Dictionary<string, string>();
 
     Layout layout;
 
@@ -63,18 +66,41 @@ public class VisualizationEditor : MonoBehaviour {
         // Second child
         InitializeImageRepresentation();
 
+        // Third child
+        InitializeModelRepresentation();
+
         layout = GameObject.Find("LayoutHandler").GetComponent<Layout>();
         layout.ForceDirectedLayout(nodes, edges, centerPoint, radius);
 
         InitializeImageURLs();
-
         FetchImageURLsFromDic();
 
+        InitializeModelURLs();
+        FetchModelURLsFromDic();
+
+
+        //ActivateSphereRepresentation();
+        //ActivateModelRepresentation();
         //ActivateImageRepresentation();
+        //ActivateModelRepresentation();
+        ActivateSphereRepresentation();
+        //ActivateModelRepresentation();
     }
 
     void Update() {
         
+    }
+
+    public void InitializeModelURLs() {
+        modelURLs.Add("Zelle", "https://raw.githubusercontent.com/rwth-acis/i5-Toolkit-for-Unity/master/Assets/i5%20Toolkit%20for%20Unity/Samples%7E/Importers/ObjImporter/Obj%20Models/Monkey_textured.obj");
+    }
+
+    public void FetchModelURLsFromDic() {
+        foreach (GameObject node in nodes.Values) {
+            Node nodeComponent = node.GetComponent<Node>();
+
+            modelURLs.TryGetValue(nodeComponent.label, out nodeComponent.modelURL);
+        }
     }
 
     public void InitializeImageURLs() {
@@ -92,7 +118,6 @@ public class VisualizationEditor : MonoBehaviour {
         imageURLs.Add("Elektrische", "https://www.thoughtco.com/thmb/oVbenYpwnRpN7IBWOFAjkrbEE6Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/electricity-cable-with-sparks-artwork-525442015-5804fee23df78cbc28a71d9f.jpg");
         imageURLs.Add("Neuron", "https://upload.wikimedia.org/wikipedia/commons/1/10/Blausen_0657_MultipolarNeuron.png");
         imageURLs.Add("Haben", "https://media.pronunciationstudio.com/2013/08/Blog-have.png");
-        imageURLs.Add("Progress", "https://thumbs.dreamstime.com/b/progress-report-icon-vector-isolated-white-background-progre-transparent-sign-black-symbols-133752892.jpg");
         imageURLs.Add("Gehirn", "https://www.brainline.org/sites/all/modules/custom/bl_brain/images/brain-lateral.png");
         imageURLs.Add("Funktionen", "https://www.mometrix.com/academy/wp-content/uploads/2021/01/graphs-3-1024x508.png");
         imageURLs.Add("Cord", "https://www.polsterer-shop.de/wp-content/uploads/2020/06/cordstoff-1024x585.jpg");
@@ -105,8 +130,6 @@ public class VisualizationEditor : MonoBehaviour {
     public void FetchImageURLsFromDic() {
         foreach (GameObject node in nodes.Values) {
             Node nodeComponent = node.GetComponent<Node>();
-
-            //nodeComponent.annotation = "test";
 
             imageURLs.TryGetValue(nodeComponent.label, out nodeComponent.imageURL);
         }
@@ -284,14 +307,22 @@ public class VisualizationEditor : MonoBehaviour {
             imageRepresentation.transform.position = node.transform.position;
 
             imageRepresentation.layer = LayerMask.NameToLayer("GraphElements");
-
-            // Sphere representation is the first representation to show after initialization
-            imageRepresentation.SetActive(false);
         }
     }
 
     public void InitializeModelRepresentation() {
-        // TODO
+
+        foreach (GameObject node in nodes.Values) {
+            GameObject modelRepresentation = Instantiate(modelRepresentationPrefab);
+
+            modelRepresentation.transform.SetParent(node.transform);
+
+            modelRepresentation.transform.position = node.transform.position;
+
+            modelRepresentation.layer = LayerMask.NameToLayer("GraphElements");
+
+            //break;
+        }
     }
 
     public void ActivateSphereRepresentation() {
@@ -301,6 +332,9 @@ public class VisualizationEditor : MonoBehaviour {
 
             // Deactivate image representation
             node.transform.Find("ImageRepresentation(Clone)").gameObject.SetActive(false);
+
+            // Deactivate model representation
+            node.transform.Find("ModelRepresentation(Clone)").gameObject.SetActive(false);
         }
     }
 
@@ -313,9 +347,21 @@ public class VisualizationEditor : MonoBehaviour {
             // Activate image representation
             node.transform.Find("ImageRepresentation(Clone)").gameObject.SetActive(true);
 
-            //MeshRenderer renderer = node.transform.Find("SphereRepresentation(Clone)").gameObject.GetComponent<MeshRenderer>();
+            // Deactivate model representation
+            node.transform.Find("ModelRepresentation(Clone)").gameObject.SetActive(false);
+        }
+    }
 
-            //renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0);
+    public void ActivateModelRepresentation() {
+        foreach (GameObject node in nodes.Values) {
+            // Deactivate sphere representation
+            node.transform.Find("SphereRepresentation(Clone)").gameObject.SetActive(false);
+
+            // Deactivate image representation
+            node.transform.Find("ImageRepresentation(Clone)").gameObject.SetActive(false);
+
+            // Activate model representation
+            node.transform.Find("ModelRepresentation(Clone)").gameObject.SetActive(true);
         }
     }
 

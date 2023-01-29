@@ -35,6 +35,8 @@ public class Visualization : MonoBehaviour {
 
     private Dictionary<string, string> imageURLs = new Dictionary<string, string>();
 
+    private Dictionary<string, string> modelURLs = new Dictionary<string, string>();
+
     string savingPath;
 
     void Start() {
@@ -46,14 +48,13 @@ public class Visualization : MonoBehaviour {
         layout = GameObject.Find("LayoutHandler").GetComponent<Layout>();
 
         InitializeImageURLs();
+        InitializeModelURLs();
 
-        LoadGraph1FromFile();
+        // App starts with 'graph1.ttl' loaded
+        LoadGraph2FromFile();
 
         //DEBUGGING
-        //InitializeGraph();
-        //InitializeSphereRepresentation();
-        //InitializeImageRepresentation();
-        //ActivateSphereRepresentation();
+        //Initizalization();
     }
 
     public void Initizalization() {
@@ -64,6 +65,7 @@ public class Visualization : MonoBehaviour {
         InitializeModelRepresentation();
 
         FetchImageURLsFromDic();
+        FetchModelURLsFromDic();
 
         ActivateSphereRepresentation();
 
@@ -240,6 +242,9 @@ public class Visualization : MonoBehaviour {
 
             // Deactivate image representation
             node.transform.Find("ImageRepresentation(Clone)").gameObject.SetActive(false);
+
+            // Deactivate model representation
+            node.transform.Find("ModelRepresentation(Clone)").gameObject.SetActive(false);
         }
     }
 
@@ -251,6 +256,9 @@ public class Visualization : MonoBehaviour {
 
             // Activate image representation
             node.transform.Find("ImageRepresentation(Clone)").gameObject.SetActive(true);
+
+            // Deactivate model representation
+            node.transform.Find("ModelRepresentation(Clone)").gameObject.SetActive(false);
         }
     }
 
@@ -371,6 +379,18 @@ public class Visualization : MonoBehaviour {
         imageURLs.Add("Rome", "https://upload.wikimedia.org/wikipedia/commons/c/c0/Rome_Montage_2017.png");
         imageURLs.Add("Pope", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Pope_Francis_Korea_Haemi_Castle_19.jpg/1200px-Pope_Francis_Korea_Haemi_Castle_19.jpg");
         imageURLs.Add("Christianity", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Christian_cross.svg/1200px-Christian_cross.svg.png");
+    }
+
+    public void InitializeModelURLs() {
+        modelURLs.Add("Zelle", "https://raw.githubusercontent.com/rwth-acis/i5-Toolkit-for-Unity/master/Assets/i5%20Toolkit%20for%20Unity/Samples%7E/Importers/ObjImporter/Obj%20Models/Monkey_textured.obj");
+    }
+
+    public void FetchModelURLsFromDic() {
+        foreach (GameObject node in nodes.Values) {
+            Node nodeComponent = node.GetComponent<Node>();
+
+            modelURLs.TryGetValue(nodeComponent.label, out nodeComponent.modelURL);
+        }
     }
 
     // Return the substring that comes after the last character '/'
