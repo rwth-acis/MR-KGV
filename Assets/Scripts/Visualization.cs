@@ -40,7 +40,7 @@ public class Visualization : MonoBehaviour {
     string savingPath;
 
     void Start() {
-        // Create folder for graphs to be loaded from
+        // On first loadup of app, create folder for graphs to be loaded from
         savingPath = Application.persistentDataPath + "/rdf";
         Directory.CreateDirectory(savingPath);
 
@@ -51,12 +51,16 @@ public class Visualization : MonoBehaviour {
         InitializeModelURLs();
 
         // App starts with 'graph1.ttl' loaded
-        LoadGraph2FromFile();
+        LoadGraph1FromFile();
 
         //DEBUGGING
         //Initizalization();
     }
 
+    /// <summary>
+    /// Initialize the visualization for the graph, node representations, and pre-defined URLs.
+    /// The first representation will be the sphere representation. Also call the layout algorithm from here.
+    /// </summary>
     public void Initizalization() {
         graphGO.SetActive(true);
         InitializeGraph();
@@ -70,10 +74,6 @@ public class Visualization : MonoBehaviour {
         ActivateSphereRepresentation();
 
         LayoutRedirect();
-    }
-
-    public void LayoutRedirect() {
-        layout.ForceDirectedLayout(nodes, edges, centerPoint, radius);
     }
 
     /// <summary>
@@ -196,6 +196,9 @@ public class Visualization : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Initialize the sphere representation for nodes of the currently loaded graph.
+    /// </summary>
     public void InitializeSphereRepresentation() {
 
         foreach (GameObject node in nodes.Values) {
@@ -209,6 +212,9 @@ public class Visualization : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Initialize the image representation for nodes of the currently loaded graph.
+    /// </summary>
     public void InitializeImageRepresentation() {
 
         foreach (GameObject node in nodes.Values) {
@@ -222,6 +228,9 @@ public class Visualization : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Initialize the model representation for nodes of the currently loaded graph.
+    /// </summary>
     public void InitializeModelRepresentation() {
         
         foreach (GameObject node in nodes.Values) {
@@ -235,6 +244,9 @@ public class Visualization : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Activate the sphere representation for the currently loaded graph.
+    /// </summary>
     public void ActivateSphereRepresentation() {
         foreach (GameObject node in nodes.Values) {
             // Activate sphere representation
@@ -248,7 +260,9 @@ public class Visualization : MonoBehaviour {
         }
     }
 
-    // TODO: Only activate image, deactivate sphere representation for nodes with image URL
+    /// <summary>
+    /// Activate the image representation for the currently loaded graph.
+    /// </summary>
     public void ActivateImageRepresentation() {
         foreach (GameObject node in nodes.Values) {
             // Deactivate sphere representation
@@ -262,6 +276,9 @@ public class Visualization : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Activate the 3D model representation for the currently loaded graph.
+    /// </summary>
     public void ActivateModelRepresentation() {
         foreach (GameObject node in nodes.Values) {
             // Deactivate sphere representation
@@ -276,7 +293,7 @@ public class Visualization : MonoBehaviour {
     }
 
     /// <summary>
-    /// Given a path to a Turtle file, parse the graph data into the global IGraph 'graph'
+    /// Given a path to a Turtle file, parse the graph data into the IGraph 'graph'.
     /// </summary>
     /// <param name="filePath"></param>
     public void ReadTurtleFile(string filePath) {
@@ -298,6 +315,9 @@ public class Visualization : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Destroy all GameObjects of the graph 'graph' and clear all the variables that hold information about 'graph'.
+    /// </summary>
     public void ClearGraph() {
         // Destroy nodes and edges in scene
         Transform graphGOTransform = graphGO.transform;
@@ -313,6 +333,10 @@ public class Visualization : MonoBehaviour {
         graph.Clear();
     }
 
+    /// <summary>
+    /// Function gets called when button 'Load Graph 1' is clicked. Will load file 'graph1.ttl' from '/rdf' folder in persistent data path
+    /// and activate placement again.
+    /// </summary>
     public void LoadGraph1FromFile() {
         ClearGraph();
         graphGO.SetActive(false);
@@ -323,6 +347,10 @@ public class Visualization : MonoBehaviour {
         GameObject.Find("PlacementHandler").GetComponent<Placement>().ReactivatePlacement();
     }
 
+    /// <summary>
+    /// Function gets called when button 'Load Graph 2' is clicked. Will load file 'graph1.ttl' from '/rdf' folder in persistent data path
+    /// and activate placement again.
+    /// </summary>
     public void LoadGraph2FromFile() {
         ClearGraph();
         graphGO.SetActive(false);
@@ -333,16 +361,31 @@ public class Visualization : MonoBehaviour {
         GameObject.Find("PlacementHandler").GetComponent<Placement>().ReactivatePlacement();
     }
 
+    /// <summary>
+    /// Write the pre-defined image URLs into the variable 'imageURL' of the appropriate nodes in the scene.
+    /// </summary>
     public void FetchImageURLsFromDic() {
         foreach (GameObject node in nodes.Values) {
             Node nodeComponent = node.GetComponent<Node>();
-
-            //nodeComponent.annotation = "test";
 
             imageURLs.TryGetValue(nodeComponent.label, out nodeComponent.imageURL);
         }
     }
 
+    /// <summary>
+    /// Write the pre-defined model URLs into the variable 'modelURL' of the appropriate nodes in the scene.
+    /// </summary>
+    public void FetchModelURLsFromDic() {
+        foreach (GameObject node in nodes.Values) {
+            Node nodeComponent = node.GetComponent<Node>();
+
+            modelURLs.TryGetValue(nodeComponent.label, out nodeComponent.modelURL);
+        }
+    }
+
+    /// <summary>
+    /// Populate dictonary 'imageURLs' with image URLs.
+    /// </summary>
     public void InitializeImageURLs() {
         imageURLs.Add("Problems", "https://i.guim.co.uk/img/media/9c4164a3454b77912be9ad36a90f79885075eb34/9_46_1423_854/master/1423.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=02d0e75f8c738d515cfa5ccf7f2ceebc");
         imageURLs.Add("Cell", "https://www.genomicseducation.hee.nhs.uk/wp-content/uploads/2016/10/Cells-182516812_900px-858x286.jpg");
@@ -381,26 +424,36 @@ public class Visualization : MonoBehaviour {
         imageURLs.Add("Christianity", "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Christian_cross.svg/1200px-Christian_cross.svg.png");
     }
 
+    /// <summary>
+    /// Populate dictonary 'modelURLs' with model URLs.
+    /// </summary>
     public void InitializeModelURLs() {
         modelURLs.Add("Zelle", "https://raw.githubusercontent.com/rwth-acis/i5-Toolkit-for-Unity/master/Assets/i5%20Toolkit%20for%20Unity/Samples%7E/Importers/ObjImporter/Obj%20Models/Monkey_textured.obj");
     }
 
-    public void FetchModelURLsFromDic() {
-        foreach (GameObject node in nodes.Values) {
-            Node nodeComponent = node.GetComponent<Node>();
 
-            modelURLs.TryGetValue(nodeComponent.label, out nodeComponent.modelURL);
-        }
+    /// <summary>
+    /// Call the layout algorithm with the graph data that is currently stored in the variables 'nodes', 'edges', 'centerPoint', and 'radius'.
+    /// </summary>
+    public void LayoutRedirect() {
+        layout.ForceDirectedLayout(nodes, edges, centerPoint, radius);
     }
 
-    // Return the substring that comes after the last character '/'
+    /// <summary>
+    /// Helper function. Return the substring that comes after the last character '/'.
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
     public string SplitString(string s) {
         int lastIndex = s.LastIndexOf('/');
 
         return s.Substring(lastIndex + 1);
     }
 
-    // Output the number of different types of nodes contained within a given graph
+    /// <summary>
+    /// Helper function. Output the number of different types of nodes contained within a given graph to the console.
+    /// </summary>
+    /// <param name="g"></param>
     void analyzeGraphNodes(IGraph g) {
         int numberOfBlankNodes = 0;
         int numberOfLiteralNodes = 0;
