@@ -68,18 +68,6 @@ public class Layout : MonoBehaviour {
         }
     }
 
-    private Vector3 RepulsiveForceMinDistance(GameObject node1, GameObject node2) {
-        float distance = Vector3.Distance(node1.transform.position, node2.transform.position);
-
-        // Only apply the repulsion force if the distance is below the minimum distance
-        if (distance < minDistance) {
-            Vector3 direction = (node1.transform.position - node2.transform.position).normalized;
-            return direction * (k * k) / distance;
-        } else {
-            return Vector3.zero;
-        }
-    }
-
     private Vector3 RepulsiveForce(GameObject node1, GameObject node2) {
         Vector3 direction = (node1.transform.position - node2.transform.position).normalized;
         float distance = Vector3.Distance(node1.transform.position, node2.transform.position);
@@ -97,5 +85,17 @@ public class Layout : MonoBehaviour {
         float distance = Vector3.Distance(node.transform.position, centerPoint.transform.position);
         float forceMagnitude = distance * distance;
         return direction * forceMagnitude;
+    }
+
+    private Vector3 RepulsiveForceMinDistance(GameObject node1, GameObject node2) {
+        float distance = Vector3.Distance(node1.transform.position, node2.transform.position);
+
+        // Only apply the repulsion force if the distance is below the minimum distance
+        if (distance < minDistance) {
+            Vector3 direction = (node1.transform.position - node2.transform.position).normalized;
+            return direction * (k * k) / distance;
+        } else {
+            return Vector3.zero;
+        }
     }
 }

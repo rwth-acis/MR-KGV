@@ -348,7 +348,7 @@ public class Visualization : MonoBehaviour {
     }
 
     /// <summary>
-    /// Function gets called when button 'Load Graph 2' is clicked. Will load file 'graph1.ttl' from '/rdf' folder in persistent data path
+    /// Function gets called when button 'Load Graph 2' is clicked. Will load file 'graph2.ttl' from '/rdf' folder in persistent data path
     /// and activate placement again.
     /// </summary>
     public void LoadGraph2FromFile() {
