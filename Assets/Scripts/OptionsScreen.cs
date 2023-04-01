@@ -62,11 +62,15 @@ public class OptionsScreen : MonoBehaviour {
 
     // Load graph 1 button logic
     public void LoadGraph1() {
+        // Reset Dropdown to Sphere Representation
+        changeRepresentationDropdown.value = 0;
         GameObject.Find("VisualizationHandler").GetComponent<Visualization>().LoadGraph1FromFile();
     }
 
     // Load graph 2 button logic
     public void LoadGraph2() {
+        // Reset Dropdown to Sphere Representation
+        changeRepresentationDropdown.value = 0;
         GameObject.Find("VisualizationHandler").GetComponent<Visualization>().LoadGraph2FromFile();
     }
 }
