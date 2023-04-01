@@ -12,6 +12,11 @@ public class OptionsScreen : MonoBehaviour {
     private Button loadGraph2Button;
 
     void Start() {
+        
+    }
+
+    // Initialization in Awake, since options screen is deactivated at the beginning
+    void Awake() {
         // Find canvas
         Canvas mainScreen = GameObject.Find("MainScreen").GetComponent<Canvas>();
 

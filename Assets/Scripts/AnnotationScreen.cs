@@ -23,6 +23,11 @@ public class AnnotationScreen : MonoBehaviour {
     private TMPro.TMP_InputField tmpInputAnnotation;
 
     void Start() {
+        
+    }
+
+    // Initialization in Awake, since annotation screen is deactivated at the beginning (fixes bug for first selected node)
+    void Awake() {
         // Find canvas
         Canvas mainScreen = GameObject.Find("MainScreen").GetComponent<Canvas>();
 
