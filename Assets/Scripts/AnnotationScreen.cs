@@ -9,6 +9,7 @@ public class AnnotationScreen : MonoBehaviour {
     private GameObject annotationScreen;
     private GameObject optionsButton;
     private Button annotationBackButton;
+    private TMPro.TMP_Dropdown changeRepresentationSingleDropdown;
 
     // Variables to read/write information from UI
     private TMPro.TextMeshProUGUI tmpLabel;
@@ -29,6 +30,7 @@ public class AnnotationScreen : MonoBehaviour {
         annotationScreen = mainScreen.transform.Find("AnnotationScreen").gameObject;
         optionsButton = mainScreen.transform.Find("OptionsButton").gameObject;
         annotationBackButton = GameObject.Find("AnnotationBackButton").GetComponent<Button>();
+        changeRepresentationSingleDropdown = GameObject.Find("DropdownSingle").GetComponent<TMPro.TMP_Dropdown>();
 
         // Find relevant text fields for node-specific texts
         tmpLabel = GameObject.Find("Label").GetComponent<TMPro.TextMeshProUGUI>();
@@ -43,6 +45,7 @@ public class AnnotationScreen : MonoBehaviour {
 
         // Add listener for when the back button is clicked
         annotationBackButton.onClick.AddListener(CloseAnnotationScreen);
+        changeRepresentationSingleDropdown.onValueChanged.AddListener(ChangeRepresentation);
     }
 
     void Update() {
@@ -54,6 +57,7 @@ public class AnnotationScreen : MonoBehaviour {
         tmpInputImageURL.text = selectedNode.imageURL;
         tmpInputModelURL.text = selectedNode.modelURL;
         tmpInputAnnotation.text = selectedNode.annotation;
+        changeRepresentationSingleDropdown.value = GameObject.Find("VisualizationHandler").GetComponent<Visualization>().CheckRepresentation(selectedNode.gameObject);
     }
 
     // Annotation back button logic
@@ -67,5 +71,29 @@ public class AnnotationScreen : MonoBehaviour {
         selectedNode.imageURL = tmpInputImageURL.text;
         selectedNode.modelURL = tmpInputModelURL.text;
         selectedNode.annotation = tmpInputAnnotation.text;
+    }
+
+    // Change single representation dropdown logic
+    public void ChangeRepresentation(int value) {
+        switch (value) {
+            // Sphere
+            case 0:
+                //Debug.Log("Changed to Sphere Representation.");
+                GameObject.Find("VisualizationHandler").GetComponent<Visualization>().ActivateSphereRepresentationSingle(selectedNode.gameObject);
+                break;
+            // Image
+            case 1:
+                //Debug.Log("Changed to Image Representation.");
+                GameObject.Find("VisualizationHandler").GetComponent<Visualization>().ActivateImageRepresentationSingle(selectedNode.gameObject);
+                break;
+            // Model
+            case 2:
+                //Debug.Log("Changed to Image Representation.");
+                GameObject.Find("VisualizationHandler").GetComponent<Visualization>().ActivateModelRepresentationSingle(selectedNode.gameObject);
+                break;
+            // Invalid
+            default:
+                break;
+        }
     }
 }

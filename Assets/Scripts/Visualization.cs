@@ -293,6 +293,71 @@ public class Visualization : MonoBehaviour {
     }
 
     /// <summary>
+    /// Activate the sphere representation for the given node.
+    /// </summary>
+    /// <param name="node"></param>
+    public void ActivateSphereRepresentationSingle(GameObject node) {
+        // Activate sphere representation
+        node.transform.Find("SphereRepresentation(Clone)").gameObject.SetActive(true);
+
+        // Deactivate image representation
+        node.transform.Find("ImageRepresentation(Clone)").gameObject.SetActive(false);
+
+        // Deactivate model representation
+        node.transform.Find("ModelRepresentation(Clone)").gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Activate the image representation for the given node.
+    /// </summary>
+    /// <param name="node"></param>
+    public void ActivateImageRepresentationSingle(GameObject node) {
+        // Deactivate sphere representation
+        node.transform.Find("SphereRepresentation(Clone)").gameObject.SetActive(false);
+
+        // Activate image representation
+        node.transform.Find("ImageRepresentation(Clone)").gameObject.SetActive(true);
+
+        // Deactivate model representation
+        node.transform.Find("ModelRepresentation(Clone)").gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Activate the 3D model representation for the given node.
+    /// </summary>
+    /// <param name="node"></param>
+    public void ActivateModelRepresentationSingle(GameObject node) {
+        // Deactivate sphere representation
+        node.transform.Find("SphereRepresentation(Clone)").gameObject.SetActive(false);
+
+        // Deactivate image representation
+        node.transform.Find("ImageRepresentation(Clone)").gameObject.SetActive(false);
+
+        // Activate model representation
+        node.transform.Find("ModelRepresentation(Clone)").gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Checks which representation is active for a given node and returns an integer value that corresponds to the dropdown logic in the annotation screen.
+    /// </summary>
+    /// <param name="node"></param>
+    /// <returns></returns>
+    public int CheckRepresentation(GameObject node) {
+        if (node.transform.Find("SphereRepresentation(Clone)").gameObject.activeSelf) {
+            return 0;
+        }
+        else if (node.transform.Find("ImageRepresentation(Clone)").gameObject.activeSelf) {
+            return 1;
+        }
+        else if (node.transform.Find("ModelRepresentation(Clone)").gameObject.activeSelf) {
+            return 2;
+        }
+        else {
+            return -1;
+        }
+    }
+
+    /// <summary>
     /// Given a path to a Turtle file, parse the graph data into the IGraph 'graph'.
     /// </summary>
     /// <param name="filePath"></param>
@@ -428,7 +493,7 @@ public class Visualization : MonoBehaviour {
     /// Populate dictonary 'modelURLs' with model URLs.
     /// </summary>
     public void InitializeModelURLs() {
-        modelURLs.Add("Zelle", "https://raw.githubusercontent.com/rwth-acis/i5-Toolkit-for-Unity/master/Assets/i5%20Toolkit%20for%20Unity/Samples%7E/Importers/ObjImporter/Obj%20Models/Monkey_textured.obj");
+        modelURLs.Add("Cell", "https://raw.githubusercontent.com/rwth-acis/i5-Toolkit-for-Unity/master/Assets/i5%20Toolkit%20for%20Unity/Samples%7E/Importers/ObjImporter/Obj%20Models/Monkey_textured.obj");
     }
 
 
