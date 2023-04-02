@@ -10,6 +10,7 @@ public class OptionsScreen : MonoBehaviour {
     private TMPro.TMP_Dropdown changeRepresentationDropdown;
     private Button loadGraph1Button;
     private Button loadGraph2Button;
+    private Button fetchImagesButton;
 
     void Start() {
         
@@ -27,12 +28,14 @@ public class OptionsScreen : MonoBehaviour {
         changeRepresentationDropdown = GameObject.Find("Dropdown").GetComponent<TMPro.TMP_Dropdown>();
         loadGraph1Button = GameObject.Find("LoadGraph1Button").GetComponent<Button>();
         loadGraph2Button = GameObject.Find("LoadGraph2Button").GetComponent<Button>();
+        fetchImagesButton = GameObject.Find("FetchImagesButton").GetComponent<Button>();
 
         // Add listener for buttons
         optionsBackButton.onClick.AddListener(CloseOptionsScreen);
         changeRepresentationDropdown.onValueChanged.AddListener(ChangeRepresentation);
         loadGraph1Button.onClick.AddListener(LoadGraph1);
         loadGraph2Button.onClick.AddListener(LoadGraph2);
+        fetchImagesButton.onClick.AddListener(FetchImages);
     }
 
     // Options back button logic
@@ -77,5 +80,10 @@ public class OptionsScreen : MonoBehaviour {
         // Reset Dropdown to Sphere Representation
         changeRepresentationDropdown.value = 0;
         GameObject.Find("VisualizationHandler").GetComponent<Visualization>().LoadGraph2FromFile();
+    }
+
+    // Fetch images button logic
+    public void FetchImages() {
+        GameObject.Find("VisualizationHandler").GetComponent<Visualization>().FetchImagesFromAPI();
     }
 }

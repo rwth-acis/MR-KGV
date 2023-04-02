@@ -358,6 +358,13 @@ public class Visualization : MonoBehaviour {
     }
 
     /// <summary>
+    /// Fetches image URLs for all nodes in the graph from the Google Custom Search API.
+    /// </summary>
+    public void FetchImagesFromAPI() {
+
+    }
+
+    /// <summary>
     /// Given a path to a Turtle file, parse the graph data into the IGraph 'graph'.
     /// </summary>
     /// <param name="filePath"></param>
