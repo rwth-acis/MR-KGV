@@ -8,23 +8,30 @@ using i5.Toolkit.Core.ModelImporters;
 using i5.Toolkit.Core.ServiceCore;
 
 public class ModelRepresentation : MonoBehaviour {
+    private bool firstEnable = false;
+
     void Start() {
 
     }
 
     void Update() {
-
+        transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
     }
 
     private void OnEnable() {
         // Load 3d model from valid URL
         //if (IsValidURL(gameObject.GetComponentInParent<Node>().modelURL)) {
         //    ImportObject(gameObject.GetComponentInParent<Node>().modelURL);
-        
-        // Only load 3d model if there is not one loaded already
-        if(gameObject.transform.childCount == 0) {
-            ImportObject(gameObject.GetComponentInParent<Node>().modelURL);
+
+        if (!firstEnable) {
+            firstEnable = true;
+        } else {
+            // Only load 3d model if there is not one loaded already
+            if (gameObject.transform.childCount == 0) {
+                ImportObject(gameObject.GetComponentInParent<Node>().modelURL);
+            }
         }
+        
     }
 
     public async void ImportObject(string url) {
