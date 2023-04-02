@@ -5,6 +5,7 @@ using VDS.RDF;
 using VDS.RDF.Parsing;
 using System.IO;
 using System.Net;
+using UnityEngine.Networking;
 
 public class Visualization : MonoBehaviour {
     // Radius in which nodes get initialized around the center point
@@ -232,7 +233,7 @@ public class Visualization : MonoBehaviour {
     /// Initialize the model representation for nodes of the currently loaded graph.
     /// </summary>
     public void InitializeModelRepresentation() {
-        
+
         foreach (GameObject node in nodes.Values) {
             GameObject modelRepresentation = Instantiate(modelRepresentationPrefab);
 
@@ -345,14 +346,11 @@ public class Visualization : MonoBehaviour {
     public int CheckRepresentation(GameObject node) {
         if (node.transform.Find("SphereRepresentation(Clone)").gameObject.activeSelf) {
             return 0;
-        }
-        else if (node.transform.Find("ImageRepresentation(Clone)").gameObject.activeSelf) {
+        } else if (node.transform.Find("ImageRepresentation(Clone)").gameObject.activeSelf) {
             return 1;
-        }
-        else if (node.transform.Find("ModelRepresentation(Clone)").gameObject.activeSelf) {
+        } else if (node.transform.Find("ModelRepresentation(Clone)").gameObject.activeSelf) {
             return 2;
-        }
-        else {
+        } else {
             return -1;
         }
     }
@@ -361,7 +359,39 @@ public class Visualization : MonoBehaviour {
     /// Fetches image URLs for all nodes in the graph from the Google Custom Search API.
     /// </summary>
     public void FetchImagesFromAPI() {
+        foreach (GameObject node in nodes.Values) {
+            //Debug.Log(node.GetComponent<Node>().label + "FetchImagesFromAPI");
+            StartCoroutine(FetchImageURLForNode(node));
+        }
+    }
 
+    private IEnumerator FetchImageURLForNode(GameObject node) {
+        //Debug.Log(node.GetComponent<Node>().label + "FetchImageURLForNode");
+        
+        string apiKey = "AIzaSyCC1rF5nnMk7UaoAeflJCeB-sHypN0b_2U";
+        string searchEngineId = "6594c8c63ce364c09";
+        string query = UnityWebRequest.EscapeURL(node.GetComponent<Node>().label);
+        string url = $"https://www.googleapis.com/customsearch/v1?q={query}&num=1&searchType=image&cx={searchEngineId}&key={apiKey}";
+
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(url)) {
+            yield return webRequest.SendWebRequest();
+
+            if (webRequest.result == UnityWebRequest.Result.Success) {
+                string jsonResponse = webRequest.downloadHandler.text;
+                string fetchedImageURL = ExtractImageURLFromJson(jsonResponse);
+                node.GetComponent<Node>().imageURL = fetchedImageURL;
+            } else {
+                Debug.LogError($"Error fetching image URL: {webRequest.error}");
+            }
+        }
+    }
+
+    private string ExtractImageURLFromJson(string json) {
+        const string imageUrlPrefix = "\"link\": \"";
+        int startIndex = json.IndexOf(imageUrlPrefix) + imageUrlPrefix.Length;
+        int endIndex = json.IndexOf('"', startIndex);
+        string imageURL = json.Substring(startIndex, endIndex - startIndex);
+        return imageURL;
     }
 
     /// <summary>
@@ -394,7 +424,7 @@ public class Visualization : MonoBehaviour {
         // Destroy nodes and edges in scene
         Transform graphGOTransform = graphGO.transform;
 
-        for(int i = graphGOTransform.childCount - 1; i >= 0; i--) {
+        for (int i = graphGOTransform.childCount - 1; i >= 0; i--) {
             Transform childTransform = graphGOTransform.GetChild(i);
             Destroy(childTransform.gameObject);
         }

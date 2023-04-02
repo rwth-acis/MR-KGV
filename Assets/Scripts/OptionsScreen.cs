@@ -84,6 +84,7 @@ public class OptionsScreen : MonoBehaviour {
 
     // Fetch images button logic
     public void FetchImages() {
+        //Debug.Log("Options Screen: FetchImages() entered.");
         GameObject.Find("VisualizationHandler").GetComponent<Visualization>().FetchImagesFromAPI();
     }
 }
