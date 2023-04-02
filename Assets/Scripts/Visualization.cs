@@ -368,8 +368,8 @@ public class Visualization : MonoBehaviour {
     private IEnumerator FetchImageURLForNode(GameObject node) {
         //Debug.Log(node.GetComponent<Node>().label + "FetchImageURLForNode");
         
-        string apiKey = "AIzaSyCC1rF5nnMk7UaoAeflJCeB-sHypN0b_2U";
-        string searchEngineId = "6594c8c63ce364c09";
+        string apiKey = "APIKey";
+        string searchEngineId = "SearchEngineID";
         string query = UnityWebRequest.EscapeURL(node.GetComponent<Node>().label);
         string url = $"https://www.googleapis.com/customsearch/v1?q={query}&num=1&searchType=image&cx={searchEngineId}&key={apiKey}";
 
